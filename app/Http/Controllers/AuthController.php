@@ -12,6 +12,9 @@ use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegistrationMail;
+
 class AuthController extends Controller
 {
     public function login() {
@@ -19,17 +22,21 @@ class AuthController extends Controller
     }
 
     public function dologin(LoginRequest $request) {
-
         $credentials = $request->validated();
-        if(Auth::attempt($credentials)) {
-            $request->session()->regenerate();
 
-            return redirect()->intended('announce.index');
+        $user = User::where('email', $credentials['email'])->first();
+
+        if ($user && $user->is_verified) {
+            if (Auth::attempt($credentials)) {
+                $request->session()->regenerate();
+
+                return to_route('announce.index')->with('success', 'Vous êtes maintenant connecté.');
+            }
         }
 
         return back()->withErrors([
-            'email' => 'Identifiant incorrect'
-        ])->onlyInput('email');
+            'email' => 'Identifiants incorrect ou compte non vérifié'
+        ])->onlyInput('email')->with('error', 'Si votre compte n\'a pas été validé, vérifiez votre boîte mail. Il est possible que le courrier sois dans les spams.');
     }
 
     public function register() {
@@ -43,7 +50,7 @@ class AuthController extends Controller
             $user = $request->validated();
             $password = Hash::make($user['password']);
             $verified_password = Hash::make($user['verif_password']);
-            $registration_token = Hash::make($user['email']);
+            $registration_token = str_replace(['$', '/', '\\'], '', bcrypt(uniqid()));
 
             $newUser = User::create([
                 'name' => $user['name'],
@@ -51,11 +58,14 @@ class AuthController extends Controller
                 'password' => $password,
                 'registration_token' => $registration_token,
                 'avatar' => 'default.jpg',
+                'is_verified' => 0
             ]);
             $role = Role::findByName('user');
             $newUser->assignRole($role);
 
-            dd('vérifie la bdd');
+            Mail::send(new RegistrationMail($newUser));
+
+            return to_route('login')->with('success', 'Inscription réussie ! Pour vous connecter, vérifiez vos messages.');
         }
 
         return back()->withErrors([
@@ -67,5 +77,22 @@ class AuthController extends Controller
     public function logout() {
         Auth::logout();
         return to_route('login')->with('success', 'Déconnexion réalisée avec succès');
+    }
+
+    public function validation(Request $request) {
+        $token = $request->route('token');
+
+        $user = User::where('registration_token', $token)->first();
+
+        if($user) {
+            $user->update([
+                'is_verified' => 1,
+            ]);
+
+        return to_route('login')->with('success', 'Le compte à bien été validé. Inscription terminée.');
+        }
+
+        return to_route('login')->with('error', 'Aucun utilisateur trouvé avec le token spécifié.');
+
     }
 }

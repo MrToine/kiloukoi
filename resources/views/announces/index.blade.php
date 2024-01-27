@@ -14,6 +14,7 @@
     </div>
 
     <div class="container">
+        @include('shared.flash')
         <a href="{{ route('announce.create') }}" class="btn btn-success btn-lg">Proposer une location !</a>
         <div class="row mt-4">
             @forelse ($announces as $announce)

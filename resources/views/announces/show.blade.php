@@ -6,6 +6,12 @@
     <div class="container">
         <h1>{{ $announce->title }}</h1>
         <h5>{{ $announce->postalcode }} - {{ $announce->city }}</h5>
+        <h6>
+            Dans
+            @foreach ($announce->categories as $category)
+            <a href=""><span class="badge rounded-pill text-bg-info">{{ $category->name }}</span></a>
+            @endforeach
+        </h6>
         <hr>
         <div class="row">
             <div class="col-8">

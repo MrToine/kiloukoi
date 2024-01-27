@@ -21,11 +21,15 @@ $slugRegex = '[0-9a-z\-]+';
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('website.index');
 
 // membre
-Route::get('/register', [\App\Http\Controllers\AuthController::class, 'register'])->middleware('guest')->name('register');
-Route::post('/register', [\App\Http\Controllers\AuthController::class, 'doregister']);
-Route::get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->middleware('guest')->name('login');
-Route::post('/login', [\App\Http\Controllers\AuthController::class, 'dologin']);
-Route::delete('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->middleware('auth')->name('logout');
+Route::get('user/register', [\App\Http\Controllers\AuthController::class, 'register'])->middleware('guest')->name('register');
+Route::post('user/register', [\App\Http\Controllers\AuthController::class, 'doregister']);
+Route::get('user/validation/{token}', [\App\Http\Controllers\AuthController::class, 'validation'])
+    ->middleware('guest')
+    ->name('user.validation_account');
+
+Route::get('user/login', [\App\Http\Controllers\AuthController::class, 'login'])->middleware('guest')->name('login');
+Route::post('user/login', [\App\Http\Controllers\AuthController::class, 'dologin']);
+Route::delete('user/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
 Route::get('/announce/create', [\App\Http\Controllers\AnnounceController::class, 'create'])->middleware('auth')->name('announce.create');
 Route::post('/announce/create', [\App\Http\Controllers\AnnounceController::class, 'store'])->middleware('auth')->name('announce.store');

@@ -26,7 +26,8 @@ class User extends Authenticatable
         'password',
         'avatar',
         'description',
-        'registration_token'
+        'registration_token',
+        'is_verified'
     ];
 
     /**
