@@ -14,6 +14,7 @@
             @include('shared.flash')
             <form action="{{ route('register') }}" method="post" class="vstack gap-3">
                 @csrf
+                @include('shared.input', ['type' => 'text', 'class' => 'col', 'label' => 'Pseudo', 'name' => 'name'])
                 @include('shared.input', ['type' => 'email', 'class' => 'col', 'label' => 'Email', 'name' => 'email'])
                 @include('shared.input', ['type' => 'password', 'class' => 'col', 'label' => 'Mot de passe', 'name' => 'password'])
                 @include('shared.input', ['type' => 'password', 'class' => 'col', 'label' => 'Retapez votre mot de passe', 'name' => 'verif_password'])
