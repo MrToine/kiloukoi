@@ -9,6 +9,8 @@ use App\Mail\RequestDestroyMail;
 use App\Mail\RequestValidationMail;
 
 use App\Models\LocationRequest;
+use App\Models\PrivateBox;
+use App\Models\PrivateMessage;
 
 class AccountController extends Controller
 {
@@ -41,6 +43,14 @@ class AccountController extends Controller
     {
         $location_request->update([
             'status' => 1
+        ]);
+
+        $private_box = PrivateBox::create([
+            'owner_id' => $this->getUser()->id,
+            'tenant_id' => $location_request->tenant->id,
+            'announce_id' => $location_request->announce->id,
+            'owner_view'=> 0,
+            'tenant_view' => 0,
         ]);
 
         Mail::send(new RequestValidationMail($location_request));

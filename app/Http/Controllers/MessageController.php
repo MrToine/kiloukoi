@@ -11,10 +11,11 @@ use App\Models\Announce;
 class MessageController extends Controller
 {
     public function index() {
-        $ownerBoxes = $this->getUser()->ownerMessages;
-        $tenantBoxes = $this->getUser()->tenantMessages;
-
-        $privateBoxes = $ownerBoxes->union($tenantBoxes);
+        $user = $this->getUser();
+        $privateBoxes = PrivateBox::where(function ($query) use ($user) {
+            $query->where('owner_id', $this->getUser()->id)
+                ->orWhere('tenant_id', $this->getUser()->id);
+        })->get();
 
         return view('user.messages.index', [
             'user' => $this->getUser(),

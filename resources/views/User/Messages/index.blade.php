@@ -9,6 +9,7 @@
             <thead>
                 <tr>
                     <th>Titre de l'annonce</th>
+                    <th>Proprietaire</th>
                     <th>Participant</th>
                     <th>dernier message</th>
                 </tr>
@@ -17,11 +18,8 @@
                 @foreach ($private_boxes as $private_box)
                     <tr>
                         <td><a href="{{ route('account.messages.show', ['announce_id' => $private_box->announce->id]) }}" class="link-primary">{{ $private_box->announce->title }}</a></td>
-                        @if ($private_box->owner_id == $user->id)
-                            <td>{{ $private_box->tenant->name }}</td>
-                        @else
-                            <td>{{ $private_box->owner->name }}</td>
-                        @endif
+                        <td>{{ $private_box->owner->name }}</td>
+                        <td>{{ $private_box->tenant->name }}</td>
                         <td>{{ $private_box->updated_at }}</td>
                     </tr>
                 @endforeach

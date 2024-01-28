@@ -12,6 +12,11 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-group">
+                            <li class="list-group-item">
+                                <strong>Expéditeur:</strong> kiloukoi
+                                <span class="float-end"></span>
+                                <p class="text-secondary mt-2">Voici votre boite de messagerie privée conçernant l'annonce <a href="{{ route('announce.show', ['slug' => $private_box->announce->getSlug(), 'announce' => $private_box->announce]) }}">{!! $private_box->announce->title !!}</a>. Merci de rester courtois dans vos échanges. En cas de litige, vous pouvez nous contacter en suivant le lien : <a href="">Contact</a></p>
+                            </li>
                             @foreach ($messages as $message)
                                 <li class="list-group-item">
                                     <strong>Expéditeur:</strong> {{ $message->privateMessage->name }}

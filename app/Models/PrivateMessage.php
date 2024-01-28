@@ -12,11 +12,9 @@ class PrivateMessage extends Model
     protected $table = 'messages_private_box';
 
     protected $fillable = [
-        'owner_id',
-        'tenant_id',
-        'announce_id',
-        'owner_view',
-        'tenant_view',
+        'user_id',
+        'box_id',
+        'content'
     ];
 
     public function privateBox()

@@ -12,9 +12,11 @@ class PrivateBox extends Model
     protected $table = 'private_box';
 
     protected $fillable = [
-        'user_id',
-        'box_id',
-        'content'
+        'owner_id',
+        'tenant_id',
+        'announce_id',
+        'owner_view',
+        'tenant_view',
     ];
 
     public function owner()
