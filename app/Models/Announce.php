@@ -42,6 +42,11 @@ class Announce extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function privateBox()
+    {
+        return $this->hasOne(PrivateBox::class, 'announce_id');
+    }
+
     public function locationRequests(): HasMany {
         return $this->hasMany(LocationRequest::class);
     }

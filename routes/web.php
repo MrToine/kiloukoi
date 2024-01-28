@@ -40,7 +40,12 @@ Route::prefix('user/account')->name('account.')
     ->middleware(['auth', 'role:user|admin'])
     ->group(function () {
     Route::get('/', [\App\Http\Controllers\AccountController::class, 'index'])->name('index');
+
+    Route::get('/messages', [\App\Http\Controllers\MessageController::class, 'index'])->name('messages.index');
+    Route::get('/messages/{announce_id}', [\App\Http\Controllers\MessageController::class, 'show'])->name('messages.show');
+
     Route::get('/announces', [\App\Http\Controllers\AccountController::class, 'announces'])->name('announces');
+
     Route::get('/rents', [\App\Http\Controllers\AccountController::class, 'rents'])->name('rents');
     Route::get('/rents/requests', [\App\Http\Controllers\AccountController::class, 'rent_request'])->name('rents.request');
     Route::delete('/rents/request/validation/{location_request}', [\App\Http\Controllers\AccountController::class, 'request_validated'])->name('request.validated');
