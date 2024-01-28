@@ -18,9 +18,11 @@
         <a href="{{ route('announce.create') }}" class="btn btn-success btn-lg">Proposer une location !</a>
         <div class="row mt-4">
             @forelse ($announces as $announce)
-                <div class="col-3 mb-4">
-                    @include('announces.card')
-                </div>
+                @if ($announce->availability)
+                    <div class="col-3 mb-4">
+                        @include('announces.card')
+                    </div>
+                @endif
             @empty
                 <div class="col">
                     Aucune annonce trouvée :(

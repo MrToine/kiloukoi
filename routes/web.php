@@ -34,6 +34,14 @@ Route::delete('user/logout', [\App\Http\Controllers\AuthController::class, 'logo
 Route::get('/announce/create', [\App\Http\Controllers\AnnounceController::class, 'create'])->middleware('auth')->name('announce.create');
 Route::post('/announce/create', [\App\Http\Controllers\AnnounceController::class, 'store'])->middleware('auth')->name('announce.store');
 
+Route::prefix('user/account')->name('account.')
+    ->middleware(['auth', 'role:user|admin'])
+    ->group(function () {
+    Route::get('/', [\App\Http\Controllers\AccountController::class, 'index'])->name('index');
+    Route::get('/announces', [\App\Http\Controllers\AccountController::class, 'announces'])->name('announces');
+    Route::get('/rents/validation', [\App\Http\Controllers\AccountController::class, 'rent_request'])->name('rents.request');
+});
+
 // Annonces
 Route::get('announce', [\App\Http\Controllers\AnnounceController::class, 'index'])->name('announce.index');
 Route::get('announce/{slug}-{announce}', [\App\Http\Controllers\AnnounceController::class, 'show'])->name('announce.show')->where([

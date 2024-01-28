@@ -8,10 +8,30 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+    <link rel="icon" href="{{ asset('images/website/favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/website/favicon.png') }}" type="image/x-icon">
     <style>
         .bg-img-home {
             background-image: url('/images/website/background.png');
             background-position: center;
+            color: #fff;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .bg-img-account {
+            background-image: url('/images/website/account_bg.png');
+            background-position: center;
+            color: #fff;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .bg-footer {
+            background-image: url('/images/website/logo_inverse.png');
+            background-repeat: no-repeat;
+            background-position: right;
+            min-height: 150px;
             color: #fff;
             text-align: center;
             padding: 50px;
@@ -53,6 +73,12 @@
                             <a href="{{ route('announce.create') }}" class="btn btn-success">Proposer une location !</a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('account.announces') }}" class="nav-link">
+                                Mon compte
+                                @include('user.announces_notification')
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
                                 @method('delete')
@@ -72,6 +98,46 @@
     </nav>
 
     @yield('content')
+
+    <div class="bg-dark p-5 bg-footer mt-5">
+        <div class="row">
+            <div class="col">
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="col">
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="col">
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="col">
+                <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row-col align-self-end">
+            2024 kiloukoi
+        </div>
+    </div>
     <script>
         document.querySelectorAll('select[multiple]').forEach(function(element) {
             new TomSelect(element, {plugins: {remove_button: {title: 'supprimer'}}});

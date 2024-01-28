@@ -10,7 +10,7 @@ Vous avez un client potentiel pour l'annonce <a href="{{ route('announce.show', 
 
 
 Vous pouvez valider la demande en cliquant sur le bouton ci-dessous. **Attention** ! Sans nouvelles de votre part dans les prochaines 48h, la demande est annulé.
-<x-mail::button :url="''">
+<x-mail::button :url="route('account.rents.request')">
 Valider la demande
 </x-mail::button>
 

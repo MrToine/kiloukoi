@@ -20,7 +20,8 @@ class ContactAnnounceMail extends Mailable
      */
     public function __construct(public Announce $announce, public array $data)
     {
-        //
+        $this->mailto = $announce->user->email;
+        $this->mailfrom = $data['email'];
     }
 
     /**
@@ -29,7 +30,8 @@ class ContactAnnounceMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            to: 'contact@cobtact.be',
+            to: $this->mailto,
+            from: $this->mailfrom,
             subject: 'Concernant votre annonce !',
         );
     }

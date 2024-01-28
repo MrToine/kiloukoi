@@ -15,7 +15,7 @@
             <div class="alert alert-secondary">
                 <p>Explorez notre communauté pour louer du matériel entre particuliers. Que vous ayez besoin d'outils, d'équipement sportif, ou d'autres articles, nous facilitons le processus de location.</p>
                 <p><center><strong>ou</strong></center></p>
-                <p><p>Partagez votre matériel avec notre communauté en proposant des locations. C'est simple et bénéfique :</p></p>
+                <p>Partagez votre matériel avec notre communauté en proposant des locations. C'est simple et bénéfique</p>
             </div>
 
             <form action="{{ route('login') }}" method="post" class="vstack gap-3">

@@ -1,4 +1,13 @@
 <div class="card">
+        @if ($user && $user->id == $announce->user_id)
+            @foreach ($user->locationRequests as $locationRequest)
+                @if ($locationRequest->announce_id == $announce->id && !$locationRequest->status)
+                    <span class="badge position-absolute top-0 end-0 translate-middle text-bg-danger">Demande en attente</span>
+                @elseif ($locationRequest->announce_id == $announce->id && $locationRequest->status)
+                    <span class="badge position-absolute top-0 end-0 translate-middle text-bg-success">En location</span>
+                @endif
+            @endforeach
+        @endif
     <div class="card-body">
         <h5 class="card-title">
             <a href="{{ route('announce.show', ['slug' => $announce->getSlug(), 'announce' => $announce]) }}">{!! $announce->title !!}</a>

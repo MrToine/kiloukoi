@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\LocationRequest;
 use App\Models\Announce;
 use App\Models\Category;
 use App\Models\Option;
@@ -48,6 +49,12 @@ class AnnounceController extends Controller
 
     public function contact(Announce $announce, ContactAnnounceRequest $request) {
         Mail::send(new ContactAnnounceMail($announce, $request->validated()));
+
+        LocationRequest::create([
+            'user_id' => $announce->user_id,
+            'announce_id' => $announce->id,
+            'status' => 0
+        ]);
 
         return back()->with('success', 'Demande de location envoyée avec succès !');
     }
