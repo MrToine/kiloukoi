@@ -18,8 +18,8 @@ class LocationRequestFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => $this->faker->numberBetween(1, 12),
-            'announce_id' => $this->faker->numberBetween(1, 111),
+            'user_id' => 1,
+            'announce_id' => 110,
             'tenant_id' => $this->faker->numberBetween(1, 12),
             'status' => 0
         ];

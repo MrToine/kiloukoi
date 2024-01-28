@@ -13,8 +13,14 @@
     </li>
     <li class="nav-item">
         <a class="nav-link{{ str_contains($user_route, '.announces') ? ' active' : '' }}" aria-current="page" href="{{ route('account.announces') }}">
-            Mes locations
+            Mes offres
             @include('user.announces_notification')
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link{{ str_contains($user_route, '.rents') ? ' active' : '' }}" aria-current="page" href="{{ route('account.rents') }}">
+            Mes locations
+            @include('user.rents_notification')
         </a>
     </li>
 </ul>

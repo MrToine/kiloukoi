@@ -41,6 +41,7 @@ Route::prefix('user/account')->name('account.')
     ->group(function () {
     Route::get('/', [\App\Http\Controllers\AccountController::class, 'index'])->name('index');
     Route::get('/announces', [\App\Http\Controllers\AccountController::class, 'announces'])->name('announces');
+    Route::get('/rents', [\App\Http\Controllers\AccountController::class, 'rents'])->name('rents');
     Route::get('/rents/requests', [\App\Http\Controllers\AccountController::class, 'rent_request'])->name('rents.request');
     Route::delete('/rents/request/validation/{location_request}', [\App\Http\Controllers\AccountController::class, 'request_validated'])->name('request.validated');
     Route::delete('/rents/request/destroy/{location_request}', [\App\Http\Controllers\AccountController::class, 'request_destroy'])->name('request.destroy');
