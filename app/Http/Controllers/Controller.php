@@ -17,4 +17,8 @@ class Controller extends BaseController
     {
         View::share('user', auth()->user());
     }
+
+    protected function getUser() {
+        return auth()->user();
+    }
 }

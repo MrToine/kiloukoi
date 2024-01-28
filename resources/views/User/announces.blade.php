@@ -8,11 +8,15 @@
             <div class="col-9">
                 <h2>Mes offres de location</h2>
                 <div class="row mt-4">
-                    @foreach ($user->announces->sortByDesc('id') as $announce)
+                    @forelse ($user->announces->sortByDesc('id') as $announce)
                         <div class="col-3 mb-3">
                             @include('announces.card')
                         </div>
-                    @endforeach
+                    @empty
+                        <div class="col-3 mb-3">
+                            Aucune annonce
+                        </div>
+                    @endforelse
                 </div>
             </div>
             <div class="col-3">

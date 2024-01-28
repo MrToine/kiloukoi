@@ -12,6 +12,7 @@ class LocationRequest extends Model
     protected $fillable = [
         'user_id',
         'announce_id',
+        'tenant_id',
         'status'
     ];
 
@@ -20,8 +21,13 @@ class LocationRequest extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function annonce()
+    public function announce()
     {
         return $this->belongsTo(Announce::class);
+    }
+
+    public function tenant()
+    {
+        return $this->belongsTo(User::class, 'tenant_id');
     }
 }

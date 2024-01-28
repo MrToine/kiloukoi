@@ -13,7 +13,6 @@
     </div>
 
     <div class="container">
-
         <h2>Les dernières offres de location</h2>
         <div class="row">
             @foreach ($announces as $announce)

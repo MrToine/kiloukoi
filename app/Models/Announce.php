@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\User;
 use App\Models\Option;
 use App\Models\Category;
+use App\Models\LocationRequests;
 
 class Announce extends Model
 {
@@ -39,6 +40,10 @@ class Announce extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function locationRequests(): HasMany {
+        return $this->hasMany(LocationRequest::class);
     }
 
     public function getSlug(): String {

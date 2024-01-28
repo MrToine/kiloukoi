@@ -27,6 +27,8 @@ Route::get('user/validation/{token}', [\App\Http\Controllers\AuthController::cla
     ->middleware('guest')
     ->name('user.validation_account');
 
+Route::get('user/{id}', [\App\Http\Controllers\AuthController::class, 'login'])->middleware('guest')->name('user.profile');
+
 Route::get('user/login', [\App\Http\Controllers\AuthController::class, 'login'])->middleware('guest')->name('login');
 Route::post('user/login', [\App\Http\Controllers\AuthController::class, 'dologin']);
 Route::delete('user/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->middleware('auth')->name('logout');
@@ -39,7 +41,9 @@ Route::prefix('user/account')->name('account.')
     ->group(function () {
     Route::get('/', [\App\Http\Controllers\AccountController::class, 'index'])->name('index');
     Route::get('/announces', [\App\Http\Controllers\AccountController::class, 'announces'])->name('announces');
-    Route::get('/rents/validation', [\App\Http\Controllers\AccountController::class, 'rent_request'])->name('rents.request');
+    Route::get('/rents/requests', [\App\Http\Controllers\AccountController::class, 'rent_request'])->name('rents.request');
+    Route::delete('/rents/request/validation/{location_request}', [\App\Http\Controllers\AccountController::class, 'request_validated'])->name('request.validated');
+    Route::delete('/rents/request/destroy/{location_request}', [\App\Http\Controllers\AccountController::class, 'request_destroy'])->name('request.destroy');
 });
 
 // Annonces

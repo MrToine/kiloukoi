@@ -12,6 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->string('avatar');
+            $table->longText('description');
+            $table->string('registration_token');
             $table->boolean('is_verified');
         });
     }

@@ -31,7 +31,7 @@ class AnnounceController extends Controller
         }
 
         return view('announces.index', [
-            'announces' => $query->paginate(16),
+            'announces' => Announce::orderBy('created_at', 'desc')->where('availability', '=', 1)->paginate(12),
             'input' => $request->validated()
         ]);
     }
@@ -53,6 +53,7 @@ class AnnounceController extends Controller
         LocationRequest::create([
             'user_id' => $announce->user_id,
             'announce_id' => $announce->id,
+            'tenant_id' => $this->getUser()->id,
             'status' => 0
         ]);
 

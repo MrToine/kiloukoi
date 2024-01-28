@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('announces', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('title');
             $table->longText('description');
             $table->string('adress');
@@ -21,6 +22,8 @@ return new class extends Migration
             $table->integer('price');
             $table->boolean('availability');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

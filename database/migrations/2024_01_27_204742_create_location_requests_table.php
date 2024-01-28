@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('location_requests', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('tenant_id');
             $table->unsignedBigInteger('announce_id');
             $table->string('status');
             $table->timestamps();
 
+            $table->foreign('tenant_id')->references('id')->on('users');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('announce_id')->references('id')->on('announces');
         });

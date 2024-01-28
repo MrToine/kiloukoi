@@ -58,6 +58,7 @@ class AuthController extends Controller
                 'password' => $password,
                 'registration_token' => $registration_token,
                 'avatar' => 'default.jpg',
+                'description' => '',
                 'is_verified' => 0
             ]);
             $role = Role::findByName('user');
