@@ -43,6 +43,7 @@ Route::prefix('user/account')->name('account.')
 
     Route::get('/messages', [\App\Http\Controllers\MessageController::class, 'index'])->name('messages.index');
     Route::get('/messages/{announce_id}', [\App\Http\Controllers\MessageController::class, 'show'])->name('messages.show');
+    Route::post('/messages/{box_id}', [\App\Http\Controllers\MessageController::class, 'store'])->name('messages.store');
 
     Route::get('/announces', [\App\Http\Controllers\AccountController::class, 'announces'])->name('announces');
 

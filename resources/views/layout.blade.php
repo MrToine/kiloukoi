@@ -75,7 +75,7 @@
                         <li class="nav-item">
                             <a href="{{ route('account.announces') }}" class="nav-link">
                                 Mon compte
-                                @include('user.announces_notification')
+                                @include('shared.notifications')
                             </a>
                         </li>
                         <li class="nav-item">

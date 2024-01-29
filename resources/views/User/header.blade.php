@@ -24,7 +24,10 @@
         </a>
     </li>
     <li class="nav-item">
-        <a @class(['nav-link', 'active' => str_contains($user_route, '.messages')])  aria-current="page" href="{{ route('account.messages.index') }}">Messages</a>
+        <a @class(['nav-link', 'active' => str_contains($user_route, '.messages')])  aria-current="page" href="{{ route('account.messages.index') }}">
+            Messages
+            @include('user.messages_notification')
+        </a>
     </li>
 </ul>
 

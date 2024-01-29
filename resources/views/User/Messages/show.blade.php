@@ -7,10 +7,10 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-white">
                         <h5 class="card-title">Boîte de Messages pour {{ $private_box->announce->title }}</h5>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body bg-light">
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <strong>Expéditeur:</strong> kiloukoi
@@ -19,17 +19,17 @@
                             </li>
                             @foreach ($messages as $message)
                                 <li class="list-group-item">
-                                    <strong>Expéditeur:</strong> {{ $message->privateMessage->name }}
+                                    <strong>Expéditeur:</strong> {{ $message->user->name }}
                                     <span class="float-end">{{ \Carbon\Carbon::parse($message->created_at)->isoFormat('DD MMM YYYY à HH:mm') }}</span>
                                     <p class="text-secondary mt-2">{!! nl2br($message->message) !!}</p>
                                 </li>
                             @endforeach
                         </ul>
 
-                        <form action="#" method="post" class="mt-3">
+                        <form action="{{ route('account.messages.store', ['box_id' => $private_box->id]) }}" method="post" class="mt-3">
                             <div class="mb-3">
-                                <label for="messageContent" class="form-label">Nouveau Message:</label>
-                                <textarea class="form-control" id="messageContent" name="messageContent" rows="3"></textarea>
+                                @csrf
+                                @include('shared.input', ['type' => 'textarea', 'name' => 'message'])
                             </div>
                             <button type="submit" class="btn btn-primary">Envoyer</button>
                         </form>

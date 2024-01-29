@@ -73,4 +73,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(PrivateMessage::class, 'user_id');
     }
+
+    public function unreadMessagesCount()
+    {
+        $ownerUnreadCount = $this->ownerMessages()->where('owner_view', false)->count();
+        $tenantUnreadCount = $this->tenantMessages()->where('tenant_view', false)->count();
+
+        return $ownerUnreadCount + $tenantUnreadCount;
+    }
 }

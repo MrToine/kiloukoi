@@ -14,7 +14,7 @@ class PrivateMessage extends Model
     protected $fillable = [
         'user_id',
         'box_id',
-        'content'
+        'message'
     ];
 
     public function privateBox()
@@ -22,8 +22,8 @@ class PrivateMessage extends Model
         return $this->belongsTo(PrivateBox::class, 'box_id');
     }
 
-    public function privateMessage()
+    public function user()
     {
-        return $this->hasOne(User::class, 'id');
+        return $this->BelongsTo(User::class, 'user_id');
     }
 }
