@@ -31,7 +31,7 @@ class AnnounceController extends Controller
         }
 
         return view('announces.index', [
-            'announces' => Announce::orderBy('created_at', 'desc')->where('availability', '=', 1)->paginate(12),
+            'announces' => $query->paginate(16),
             'input' => $request->validated()
         ]);
     }

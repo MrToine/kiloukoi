@@ -1,5 +1,7 @@
 @extends('layout')
 
+@section('title', 'Louez de particuliers à particuliers')
+
 @section('content')
     <div class="bg-light p-5 mb-5 text-center bg-img-home">
         <div class="container">
@@ -13,6 +15,7 @@
     </div>
 
     <div class="container">
+        @include('shared.flash')
         <h2>Les dernières offres de location</h2>
         <div class="row">
             @foreach ($announces as $announce)

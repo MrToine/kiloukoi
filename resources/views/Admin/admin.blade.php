@@ -10,9 +10,11 @@
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-warning navbar-expand-lg">
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Locations</a>
+            <a class="navbar-brand" href="{{ route('admin.home') }}">
+                <img src="{{ asset('images/admin/logo_horizontal.png') }}" alt="" style="height:50px;">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="toggle Navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -23,6 +25,7 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a @class(['nav-link', 'active' => str_contains($route, 'announce.')]) href="{{ route('admin.announce.index') }}">Gestion des annonces</a></li>
+                    <li class="nav-item"><a @class(['nav-link', 'active' => str_contains($route, 'category.')]) href="{{ route('admin.category.index') }}">Gestion des Catégories</a></li>
                     <li class="nav-item"><a @class(['nav-link', 'active' => str_contains($route, 'option.')]) href="{{ route('admin.option.index') }}">Gestion des options</a></li>
                 </ul>
                 <div class="ms-auto">
@@ -35,6 +38,9 @@
                                     <button class="nav-link link-danger">Déconnexion</button>
                                 </form>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('website.index') }}" target="_blank" class="nav-link link-info">Retour au site -></a>
+                            </li>
                         </ul>
                     @endauth
                 </div>
@@ -44,6 +50,7 @@
 
     <div class="container mt-5">
         @include('shared.flash')
+        @include('admin.shared.breadcrumb')
 
         @yield('content')
     </div>

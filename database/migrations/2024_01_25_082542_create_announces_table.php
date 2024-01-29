@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('city');
             $table->integer('price');
             $table->boolean('availability');
+            $table->boolean('check_moderation');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

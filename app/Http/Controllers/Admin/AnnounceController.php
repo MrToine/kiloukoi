@@ -76,6 +76,17 @@ class AnnounceController extends Controller
      */
     public function destroy(Announce $announce)
     {
+        $privateBox = $announce->privateBox;
+
+        if ($privateBox) {
+            if( $privateBox->messages()) {
+                $privateBox->messages()->delete();
+            }
+            $privateBox->delete();
+        }
+
+        $announce->categories()->detach();
+        $announce->options()->detach();
         $announce->delete();
         return to_route('admin.announce.index')->with('success', 'L\'annonce à bien été supprimer !');
     }

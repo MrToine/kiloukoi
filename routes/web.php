@@ -19,6 +19,7 @@ $slugRegex = '[0-9a-z\-]+';
 
 //accueil
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('website.index');
+Route::get('/faker', [\App\Http\Controllers\HomeController::class, 'create_users_default']);
 
 // membre
 Route::get('user/register', [\App\Http\Controllers\AuthController::class, 'register'])->middleware('guest')->name('register');
@@ -67,6 +68,8 @@ Route::post('announce/{announce}', [\App\Http\Controllers\AnnounceController::cl
 Route::prefix('admin')->name('admin.')
     ->middleware(['role:admin'])
     ->group(function () {
+    Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
+    Route::resource('user', \App\Http\Controllers\Admin\UserController::class)->except(['show']);
     Route::resource('announce', \App\Http\Controllers\Admin\AnnounceController::class)->except(['show']);
     Route::resource('category', \App\Http\Controllers\Admin\CategoryController::class)->except(['show']);
     Route::resource('option', \App\Http\Controllers\Admin\OptionController::class)->except(['show']);
