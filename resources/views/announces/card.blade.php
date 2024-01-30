@@ -10,7 +10,7 @@
         @endif
     <div class="card-body">
         <h5 class="card-title">
-            <a href="{{ route('announce.show', ['slug' => $announce->getSlug(), 'announce' => $announce]) }}">{!! $announce->title !!}</a>
+            <a href="{{ route('announce.show', ['slug' => $announce->getSlug(), 'announce' => $announce]) }}">{{ $announce->title }}</a>
         </h5>
         <p class="card-text">
             le {{ $announce->created_at }} - {{ $announce->postalcode }} - {!! $announce->city !!}

@@ -20,7 +20,7 @@
                         <td><a href="{{ route('account.messages.show', ['announce_id' => $private_box->announce->id]) }}" class="link-primary">{{ $private_box->announce->title }}</a></td>
                         <td>{{ $private_box->owner->name }}</td>
                         <td>{{ $private_box->tenant->name }}</td>
-                        <td>{{ $private_box->updated_at }}</td>
+                        <td>{{ \Carbon\Carbon::parse($private_box->updated_at)->isoFormat('DD MMM YYYY à HH:mm') }}</td>
                     </tr>
                 @endforeach
             </tbody>

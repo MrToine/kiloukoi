@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RequestDestroyMail;
+use App\Mail\RequestCancelationMail;
 use App\Mail\RequestValidationMail;
 
 use App\Models\Announce;
@@ -27,10 +28,10 @@ class AccountController extends Controller
 
         $user = $this->getUser();
 
-        $rentals = Announce::whereHas('privateBox', function ($query) use ($user) {
-            $query->where('tenant_id', $user->id);
-        })
-        ->get();
+        $rentals = LocationRequest::where('tenant_id', $user->id)
+                              ->with('announce')
+                              ->orderBy('created_at', 'desc')
+                              ->get();
 
         return view('user.rents', [
             'user' => $this->getUser(),
@@ -38,15 +39,22 @@ class AccountController extends Controller
         ]);
     }
 
-    public function rent_request() {
+    public function rent_request(LocationRequest $rents) {
         return view('user.rents_request', ['user' => $this->getUser()]);
     }
 
-    public function request_destroy(LocationRequest $location_request)
+    public function request_destroy(LocationRequest $location_request, Request $request)
     {
-        $location_request->delete();
+        if(!$location_request->user_id == $this->getUser()->id) {
+            return to_route('website.index');
+        }
+        if($request->input('location_type') && $request->input('location_type') == "end") {
+            Mail::send(new RequestCancelationMail($location_request));
+        }else{
+            Mail::send(new RequestDestroyMail($location_request));
+        }
 
-        Mail::send(new RequestDestroyMail($location_request));
+        $location_request->delete();
 
         return to_route('account.rents.request')->with('success', 'La demande de location pour '.$location_request->announce->title.' de '.$location_request->tenant->name.' à bien été annulée !');
     }
@@ -68,6 +76,18 @@ class AccountController extends Controller
         Mail::send(new RequestValidationMail($location_request));
 
         return to_route('account.rents.request')->with('success', 'La demande conçernant l\'annonce '.$location_request->announce->title.' à bien été validée ! '.$location_request->tenant->name.' est son locataire actuel. Pour convenir d\'un rendez-vous, et pouvoir correspondre plus facilement avec le locataire, une messagerie personnelle à été créer. Seul vous et le locataire du bien y avait accès.');
+    }
+
+    public function close_list() {
+
+        $user = $this->getUser();
+
+        $announces = $this->getUser()->locationRequests->where('status', true);
+
+        return view('user.rents_close', [
+            'user' => $this->getUser(),
+            'announces' => $announces
+        ]);
     }
 
     public function history() {

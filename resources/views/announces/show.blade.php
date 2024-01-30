@@ -34,7 +34,7 @@
         </div>
 
         <div class="mt-4">
-            <p>{!! nl2br($announce->description) !!}</p>
+            <p>{{ nl2br($announce->description) }}</p>
         </div>
 
         <hr>

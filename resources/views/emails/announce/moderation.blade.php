@@ -25,7 +25,7 @@ Votre annonce n'a malheureusement pas été retenue.
 
 **Raison** : Elle ne correspond pas aux règles.
 
-Pour éviter que votre prochaine annonce ne sois pas retenu, vous pouvez éviter les erreurs courante en suivant le guide du parfait proprio !
+Pour éviter que votre prochaine annonce ne sois pas retenu, vous pouvez éviter les erreurs courante en lisant <a href="{{ route('website.index') }}/pourquoi-mon-annonce-est-refusee">comment bien créer une annonce</a> !
 
 Thanks,<br>
 {{ config('app.name') }}

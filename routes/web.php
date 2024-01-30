@@ -94,6 +94,7 @@ Route::prefix('user/account')->name('account.')
     Route::get('/rents', [\App\Http\Controllers\AccountController::class, 'rents'])->name('rents');
     Route::get('/rents/requests', [\App\Http\Controllers\AccountController::class, 'rent_request'])->name('rents.request');
     Route::delete('/rents/request/validation/{location_request}', [\App\Http\Controllers\AccountController::class, 'request_validated'])->name('request.validated');
+    Route::get('/rents/close/', [\App\Http\Controllers\AccountController::class, 'close_list'])->name('rents.close');
     Route::delete('/rents/request/destroy/{location_request}', [\App\Http\Controllers\AccountController::class, 'request_destroy'])->name('request.destroy');
 });
 
