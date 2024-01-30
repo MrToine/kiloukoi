@@ -195,6 +195,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Tabuna\Breadcrumbs\BreadcrumbsServiceProvider::class,
+
         Barryvdh\Debugbar\ServiceProvider::class,
 
     ],

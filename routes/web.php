@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Role;
 
+use Tabuna\Breadcrumbs\Trail;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,11 +16,50 @@ use Spatie\Permission\Models\Role;
 |
 */
 
+/* Breadcrumb admin */
+Breadcrumbs::for('admin.home', function ($trail) {
+    $trail->push('Home', route('website.index'));
+    $trail->push('Administration', route('admin.home'));
+});
+
+//Annonces
+Breadcrumbs::for('admin.announce.index', function ($trail) {
+    $trail->parent('admin.home');
+    $trail->push('Annonces', route('admin.announce.index'));
+});
+Breadcrumbs::for('admin.announce.create', function ($trail) {
+    $trail->parent('admin.announce.index');
+    $trail->push('Créer une annonce', route('admin.announce.create'));
+});
+
+//Categories
+Breadcrumbs::for('admin.category.index', function ($trail) {
+    $trail->parent('admin.announce.index');
+    $trail->push('Catégories', route('admin.category.index'));
+});
+Breadcrumbs::for('admin.category.create', function ($trail) {
+    $trail->parent('admin.category.index');
+    $trail->push('Créer une catégorie', route('admin.category.create'));
+});
+
+//Options
+Breadcrumbs::for('admin.option.index', function ($trail) {
+    $trail->parent('admin.announce.index');
+    $trail->push('Options', route('admin.option.index'));
+});
+Breadcrumbs::for('admin.option.create', function ($trail) {
+    $trail->parent('admin.option.index');
+    $trail->push('Créer une option', route('admin.option.create'));
+});
+
 $idRegex = '[0-9]+';
 $slugRegex = '[0-9a-z\-]+';
 
 //accueil
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name('website.index');
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])
+    ->name('website.index')
+    ->breadcrumbs(fn (Trail $trail) => $trail->push('Home', route('website.index')));
+
 Route::get('/faker', [\App\Http\Controllers\HomeController::class, 'create_users_default']);
 
 // membre
@@ -41,6 +82,8 @@ Route::prefix('user/account')->name('account.')
     ->middleware(['auth', 'role:user|admin'])
     ->group(function () {
     Route::get('/', [\App\Http\Controllers\AccountController::class, 'index'])->name('index');
+
+    Route::get('/mypage', [\App\Http\Controllers\AccountController::class, 'mypage'])->name('mypage');
 
     Route::get('/messages', [\App\Http\Controllers\MessageController::class, 'index'])->name('messages.index');
     Route::get('/messages/{announce_id}', [\App\Http\Controllers\MessageController::class, 'show'])->name('messages.show');
@@ -68,9 +111,21 @@ Route::post('announce/{announce}', [\App\Http\Controllers\AnnounceController::cl
 Route::prefix('admin')->name('admin.')
     ->middleware(['role:admin'])
     ->group(function () {
-    Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
-    Route::resource('user', \App\Http\Controllers\Admin\UserController::class)->except(['show']);
-    Route::resource('announce', \App\Http\Controllers\Admin\AnnounceController::class)->except(['show']);
-    Route::resource('category', \App\Http\Controllers\Admin\CategoryController::class)->except(['show']);
-    Route::resource('option', \App\Http\Controllers\Admin\OptionController::class)->except(['show']);
+    Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index'])
+        ->name('home');
+    Route::get('/announce/{announce}/check_moderation', [\App\Http\Controllers\Admin\AnnounceController::class, 'check_moderation'])
+        ->name('announce.check_moderation');
+    Route::resource('user', \App\Http\Controllers\Admin\UserController::class)
+        ->except(['show']);
+    Route::resource('announce', \App\Http\Controllers\Admin\AnnounceController::class)
+        ->except(['show']);
+    Route::resource('page', \App\Http\Controllers\Admin\PageController::class)
+        ->except(['show']);
+    Route::resource('category', \App\Http\Controllers\Admin\CategoryController::class)
+        ->except(['show']);
+    Route::resource('option', \App\Http\Controllers\Admin\OptionController::class)
+        ->except(['show']);
 });
+
+//pages
+Route::get('/{slug}', [App\Http\Controllers\PageController::class, 'index'])->name('page.show');

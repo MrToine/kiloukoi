@@ -87,7 +87,7 @@
                         </li>
                         <li class="nav-item">
                             @role('admin')
-                                <a href="{{ route('admin.announce.index') }}" class="nav-link link-warning">Admin</a>
+                                <a href="{{ route('admin.home') }}" class="nav-link link-warning">Admin @include('admin.shared.requests_notification')</a>
                             @endrole
                         </li>
                     </ul>
@@ -104,10 +104,10 @@
             <div class="col">
                 <h6>kiloukoi.be</h6>
                 <ul classe="list-group list-group-flush">
-                    <li class="list-group"><a href="" class="link-secondary">Pourquoi kiloukoi ?</a></li>
-                    <li class="list-group"><a href="" class="link-secondary">Fonctionnement</a></li>
+                    <li class="list-group"><a href="/pourquoi-kiloukoi" class="link-secondary">Pourquoi kiloukoi ?</a></li>
+                    <li class="list-group"><a href="/a-propos" class="link-secondary">Fonctionnement</a></li>
                     <li class="list-group"><a href="" class="link-secondary">Blog</a></li>
-                    <li class="list-group"><a href="" class="link-secondary">Contact</a></li>
+                    <li class="list-group"><a href="mailto:contact@kiloukoi.be" class="link-secondary">Contact</a></li>
                 </ul>
             </div>
             <div class="col">
@@ -121,14 +121,14 @@
             <div class="col">
                 <h6>Assistance</h6>
                 <ul classe="list-group list-group-flush">
-                    <li class="list-group"><a href="" class="link-secondary">Mon annonce n'a pas été validée</a></li>
+                    <li class="list-group"><a href="/pourquoi-mon-annonce-est-refusee" class="link-secondary">Mon annonce n'a pas été validée</a></li>
                 </ul>
             </div>
             <div class="col">
                 <h6>Informations</h6>
                 <ul classe="list-group list-group-flush">
-                    <li class="list-group"><a href="" class="link-secondary">Politique de confidentialité</a></li>
-                    <li class="list-group"><a href="" class="link-secondary">Être un bon locataire</a></li>
+                    <li class="list-group"><a href="/politique-de-confidentialite" class="link-secondary">Politique de confidentialité</a></li>
+                    <li class="list-group"><a href="/etre-un-bon-locataire" class="link-secondary">Être un bon locataire</a></li>
                     <li class="list-group"><a href="" class="link-secondary">Guide du parfait annonceur</a></li>
                 </ul>
             </div>

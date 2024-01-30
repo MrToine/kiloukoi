@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Http\Request;
 
+use App\Models\Page;
 use App\Models\Category;
 use App\Models\Option;
 use App\Models\Announce;
@@ -14,11 +16,16 @@ use App\Models\PrivateBox;
 use App\Models\PrivateMessage;
 
 
-class HomeController extends Controller
+class HomeController extends AdminController
 {
     public function index() {
 
         $summaries = [
+            [
+                'title' => 'pages',
+                'total' => Page::count(),
+                'route' => 'admin.page',
+            ],
             [
                 'title' => 'annonces',
                 'total' => Announce::count(),

@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-9">
-                <h2>Mes offres de location</h2>
+                <h2>Mes annonces</h2>
                 <div class="row mt-4">
                     @forelse ($user->announces->sortByDesc('id') as $announce)
                         <div class="col-3 mb-3">

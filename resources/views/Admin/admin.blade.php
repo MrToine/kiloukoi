@@ -24,9 +24,8 @@
 
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a @class(['nav-link', 'active' => str_contains($route, 'announce.')]) href="{{ route('admin.announce.index') }}">Gestion des annonces</a></li>
-                    <li class="nav-item"><a @class(['nav-link', 'active' => str_contains($route, 'category.')]) href="{{ route('admin.category.index') }}">Gestion des Catégories</a></li>
-                    <li class="nav-item"><a @class(['nav-link', 'active' => str_contains($route, 'option.')]) href="{{ route('admin.option.index') }}">Gestion des options</a></li>
+                    <li class="nav-item"><a @class(['nav-link', 'active' => str_contains($route, 'admin.home')]) href="{{ route('admin.home') }}">Gestion</a></li>
+                    <li class="nav-item"><a @class(['nav-link', 'active' => str_contains($route, 'admin.announce')]) href="{{ route('admin.announce.index') }}">Requêtes @include('admin.shared.requests_notification')</a></li>
                 </ul>
                 <div class="ms-auto">
                     @auth

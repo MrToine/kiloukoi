@@ -8,14 +8,15 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\RequestDestroyMail;
 use App\Mail\RequestValidationMail;
 
+use App\Models\Announce;
 use App\Models\LocationRequest;
 use App\Models\PrivateBox;
 use App\Models\PrivateMessage;
 
 class AccountController extends Controller
 {
-    public function index() {
-        return;
+    public function mypage() {
+        return view('user.mypage', ['user' => $this->getUser()]);
     }
 
     public function announces() {
@@ -23,7 +24,18 @@ class AccountController extends Controller
     }
 
     public function rents() {
-        return view('user.rents', ['user' => $this->getUser()]);
+
+        $user = $this->getUser();
+
+        $rentals = Announce::whereHas('privateBox', function ($query) use ($user) {
+            $query->where('tenant_id', $user->id);
+        })
+        ->get();
+
+        return view('user.rents', [
+            'user' => $this->getUser(),
+            'rents' => $rentals,
+        ]);
     }
 
     public function rent_request() {

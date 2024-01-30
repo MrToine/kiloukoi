@@ -9,7 +9,7 @@ use App\Models\Option;
 
 use App\Http\Requests\Admin\OptionFormRequest;
 
-class OptionController extends Controller
+class OptionController extends AdminController
 {
     /**
      * Display a listing of the resource.

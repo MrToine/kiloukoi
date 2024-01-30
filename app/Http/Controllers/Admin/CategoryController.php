@@ -9,7 +9,7 @@ use App\Models\Category;
 
 use App\Http\Requests\Admin\CategoryFormRequest;
 
-class CategoryController extends Controller
+class CategoryController extends AdminController
 {
         /**
      * Display a listing of the resource.

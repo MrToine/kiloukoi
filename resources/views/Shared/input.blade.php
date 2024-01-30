@@ -1,6 +1,7 @@
 @php
     $type ??= "text";
     $class ??= null;
+    $style ??= null;
     $name ??= "";
     $label ??= ucfirst($name);
     $value ??= "";
@@ -12,11 +13,11 @@
 
     @if ($type == 'textarea')
 
-        <textarea class="form-control @error($name) is-invalid @enderror" type="{{ $type }}" name="{{ $name }}">{{ old($name, $value) }}</textarea>
+        <textarea class="form-control @error($name) is-invalid @enderror" type="{{ $type }}" name="{{ $name }}" style="{{ $style }}">{{ old($name, $value) }}</textarea>
 
     @else
 
-        <input class="form-control @error($name) is-invalid @enderror" type="{{ $type }}" name="{{ $name }}" value="{{ old($name, $value) }}">
+        <input class="form-control @error($name) is-invalid @enderror" type="{{ $type }}" name="{{ $name }}" value="{{ old($name, $value) }}" style="{{ $style }}">
 
     @endif
 

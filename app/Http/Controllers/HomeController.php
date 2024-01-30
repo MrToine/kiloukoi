@@ -15,7 +15,7 @@ use Spatie\Permission\Models\Role;
 class HomeController extends Controller
 {
     public function index() {
-        $announces = Announce::orderBy('created_at', 'desc')->limit(4)->get();
+        $announces = Announce::orderBy('created_at', 'desc')->where('check_moderation', true)->where('availability', true)->limit(4)->get();
         return view('home', ['announces' => $announces]);
     }
 

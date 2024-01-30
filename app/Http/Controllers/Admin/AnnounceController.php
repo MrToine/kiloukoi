@@ -5,13 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CheckModerationAnnounceMail;
+
 use App\Models\Announce;
 use App\Models\Option;
 use App\Models\Category;
 
 use App\Http\Requests\Admin\AnnounceFormRequest;
 
-class AnnounceController extends Controller
+class AnnounceController extends AdminController
 {
     /**
      * Display a listing of the resource.
@@ -89,5 +92,14 @@ class AnnounceController extends Controller
         $announce->options()->detach();
         $announce->delete();
         return to_route('admin.announce.index')->with('success', 'L\'annonce à bien été supprimer !');
+    }
+
+    public function check_moderation(Announce $announce)
+    {
+        $announce->update(['check_moderation' => !$announce->check_moderation]);
+
+        Mail::send(new CheckModerationAnnounceMail($announce));
+
+        return to_route('admin.announce.index')->with('success', 'L\'annonce à bien été modérée !');
     }
 }

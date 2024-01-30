@@ -59,6 +59,7 @@ class User extends Authenticatable
         return $this->hasMany(LocationRequest::class);
     }
 
+
     public function ownerMessages()
     {
         return $this->hasMany(PrivateBox::class, 'owner_id');

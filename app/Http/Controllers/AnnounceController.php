@@ -19,7 +19,7 @@ use App\Mail\ContactAnnounceMail;
 class AnnounceController extends Controller
 {
     public function index(SearchAnnounceRequest $request) {
-        $query = Announce::query()->orderBy('id', 'desc')->with('options');
+        $query = Announce::query()->orderBy('id', 'desc')->with('options')->where('check_moderation', true)->where('availability', true);
         if($price = $request->validated('price')) {
             $query = $query->where('price', '<=', $price);
         }
@@ -80,9 +80,11 @@ class AnnounceController extends Controller
      */
     public function store(AnnounceFormRequest $request)
     {
-        $announce = auth()->user()->announces()->create($request->validated());
-        $announce->options()->sync($request->validated('options'));
-        $announce->categories()->sync($request->validated('categories'));
-        return to_route('announce.index')->with('success', 'L\'annonce à bien été créer !');
+        $validation= $request->validated();
+        $validation['check_moderation'] = 0;
+        $announce = auth()->user()->announces()->create($validation);
+        $announce->options()->sync($validation['options']);
+        $announce->categories()->sync($validation['categories']);
+        return to_route('announce.index')->with('success', 'L\'annonce à bien été créer mais elle dois être validée par un modérateur. La décision vous sera envoyée par mail dans les plus bref délai. Restez à l\'affût !');
     }
 }

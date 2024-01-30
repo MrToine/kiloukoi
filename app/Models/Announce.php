@@ -27,6 +27,7 @@ class Announce extends Model
         'city',
         'availability',
         'user_id',
+        'check_moderation',
     ];
 
     public function options(): BelongsToMany {
