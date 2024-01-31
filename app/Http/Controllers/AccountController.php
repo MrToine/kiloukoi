@@ -9,10 +9,13 @@ use App\Mail\RequestDestroyMail;
 use App\Mail\RequestCancelationMail;
 use App\Mail\RequestValidationMail;
 
+use Illuminate\Support\Str;
+
 use App\Models\Announce;
 use App\Models\LocationRequest;
 use App\Models\PrivateBox;
 use App\Models\PrivateMessage;
+use App\Models\TemporaryToken;
 
 class AccountController extends Controller
 {
@@ -39,6 +42,14 @@ class AccountController extends Controller
         ]);
     }
 
+    public function rents_list() {
+
+        return view('user.rents_list', [
+            'user' => $this->getUser(),
+            'announces' => Announce::orderBy('created_at', 'desc')->where('user_id', $this->getUser()->id)->paginate(25)
+        ]);
+    }
+
     public function rent_request(LocationRequest $rents) {
         return view('user.rents_request', ['user' => $this->getUser()]);
     }
@@ -49,7 +60,13 @@ class AccountController extends Controller
             return to_route('website.index');
         }
         if($request->input('location_type') && $request->input('location_type') == "end") {
-            Mail::send(new RequestCancelationMail($location_request));
+            $token = Str::random(32);
+            TemporaryToken::create([
+                'user_id' => $location_request->tenant_id,
+                'token' => $token,
+            ]);
+
+            Mail::send(new RequestCancelationMail($location_request, $token));
         }else{
             Mail::send(new RequestDestroyMail($location_request));
         }

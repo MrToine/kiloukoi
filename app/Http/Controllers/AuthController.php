@@ -30,7 +30,7 @@ class AuthController extends Controller
             if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
 
-                return to_route('announce.index')->with('success', 'Vous êtes maintenant connecté.');
+                return redirect()->back()->with('success', 'Vous êtes maintenant connecté.');
             }
         }
 

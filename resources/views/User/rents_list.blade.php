@@ -1,17 +1,12 @@
 @extends('user.layout')
 
-@section('title', 'Mes locations')
+@section('title', 'Liste de mes annonces')
 
 @section('user_content')
-
     <div class="container">
         <div class="row">
             <div class="col-9">
-                <h2>Mes locations en cours</h2>
-                <div class="alert alert-warning">
-                    <p><strong>Attention ! </strong> Ne mettez fin à la location que si vous avez récupérer votre bien et que vous avez régler tout les détails avec le locataire.</p>
-                    <p>Bientôt, mettre fin à la location désactivera aussi la messagerie privée. Il ne sera plus possible d'accéder à l'historique de vos messages par la suite.</p>
-                </div>
+                <h2>Liste de mes annonces</h2>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -23,13 +18,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($announces as $request)
+                        @foreach ($announces as $announce)
                             <tr>
-                                <td style=""><a href="{{ route('announce.show', ['slug' => $request->announce->getSlug(), 'announce' => $request->announce->id]) }}" target="_blank">{{ $request->announce->title }}</a></td>
-                                <td style="">{{ $request->announce->price }}€</td>
-                                <td style="">{{ $request->announce->city }}</td>
+                                <td style=""><a href="{{ route('announce.show', ['slug' => $announce->getSlug(), 'announce' => $announce->id]) }}" target="_blank">{{ $announce->title }}</a></td>
+                                <td style="">{{ $announce->price }}€</td>
+                                <td style="">{{ $announce->city }}</td>
                                 <td style="">
-                                    @if ($request->announce->availability)
+                                    @if ($announce->availability)
                                         <strong>Disponible</strong>
                                     @else
                                         <strong>Non disponible</strong>
@@ -37,12 +32,12 @@
                                 </td>
                                 <td style="">
                                     <div class="d-flex gap-2 w-100 justify-content-end">
-                                        <form action="{{ route('account.request.destroy', ['location_request' => $request]) }}" method="post">
+                                        <form action="{{ route('announce.destroy', ['announce' => $announce]) }}" method="post">
                                             @csrf
                                             @method('delete')
-                                            @include('Shared.input', ['type' => 'hidden', 'name' => 'location_type', 'value' => 'end'])
-                                            <button class="btn btn-warning">Annuler la location</button>
+                                            <button class="btn btn-danger">Supprimer</button>
                                         </form>
+                                        <a class="btn btn-warning" href="{{ route('announce.edit', ['announce' => $announce]) }}">Modifier</a>
                                     </div>
                                 </td>
                             </tr>
@@ -54,3 +49,4 @@
         </div>
     </div>
 @endsection
+

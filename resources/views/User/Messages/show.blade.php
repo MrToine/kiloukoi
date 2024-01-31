@@ -29,7 +29,7 @@
                         <form action="{{ route('account.messages.store', ['box_id' => $private_box->id]) }}" method="post" class="mt-3">
                             <div class="mb-3">
                                 @csrf
-                                @include('shared.input', ['type' => 'textarea', 'name' => 'message'])
+                                @include('shared.input', ['type' => 'textarea', 'label' => 'message', 'name' => 'message'])
                             </div>
                             <button type="submit" class="btn btn-primary">Envoyer</button>
                         </form>

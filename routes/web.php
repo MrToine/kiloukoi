@@ -52,6 +52,36 @@ Breadcrumbs::for('admin.option.create', function ($trail) {
     $trail->push('Créer une option', route('admin.option.create'));
 });
 
+/* Breadcrumbs account */
+Breadcrumbs::for('account.mypage', function ($trail) {
+    $trail->push('Home', route('website.index'));
+    $trail->push('Mon Compte', route('account.mypage'));
+});
+Breadcrumbs::for('account.announces', function ($trail) {
+    $trail->parent('account.mypage');
+    $trail->push('Mes annonces', route('account.announces'));
+});
+Breadcrumbs::for('account.rents', function ($trail) {
+    $trail->parent('account.mypage');
+    $trail->push('Mes Locations en cours', route('account.rents'));
+});
+Breadcrumbs::for('account.rents.request', function ($trail) {
+    $trail->parent('account.announces');
+    $trail->push('Traiter les demandes', route('account.rents.request'));
+});
+Breadcrumbs::for('account.rents.close', function ($trail) {
+    $trail->parent('account.announces');
+    $trail->push('Mettre fin à une location', route('account.rents.close'));
+});
+Breadcrumbs::for('account.rents.list', function ($trail) {
+    $trail->parent('account.announces');
+    $trail->push('Listing', route('account.rents.list'));
+});
+Breadcrumbs::for('account.messages.index', function ($trail) {
+    $trail->parent('account.mypage');
+    $trail->push('Boîtes à messages', route('account.messages.index'));
+});
+
 $idRegex = '[0-9]+';
 $slugRegex = '[0-9a-z\-]+';
 
@@ -78,6 +108,10 @@ Route::delete('user/logout', [\App\Http\Controllers\AuthController::class, 'logo
 Route::get('/announce/create', [\App\Http\Controllers\AnnounceController::class, 'create'])->middleware('auth')->name('announce.create');
 Route::post('/announce/create', [\App\Http\Controllers\AnnounceController::class, 'store'])->middleware('auth')->name('announce.store');
 
+Route::get('/announce/edit/{announce}', [\App\Http\Controllers\AnnounceController::class, 'edit'])->middleware('auth')->name('announce.edit');
+Route::put('/announce/edit/{announce}', [\App\Http\Controllers\AnnounceController::class, 'update'])->middleware('auth')->name('announce.update');
+Route::delete('/announce/destroy/{announce}', [\App\Http\Controllers\AnnounceController::class, 'destroy'])->middleware('auth')->name('announce.destroy');
+
 Route::prefix('user/account')->name('account.')
     ->middleware(['auth', 'role:user|admin'])
     ->group(function () {
@@ -92,6 +126,7 @@ Route::prefix('user/account')->name('account.')
     Route::get('/announces', [\App\Http\Controllers\AccountController::class, 'announces'])->name('announces');
 
     Route::get('/rents', [\App\Http\Controllers\AccountController::class, 'rents'])->name('rents');
+    Route::get('/rents/list', [\App\Http\Controllers\AccountController::class, 'rents_list'])->name('rents.list');
     Route::get('/rents/requests', [\App\Http\Controllers\AccountController::class, 'rent_request'])->name('rents.request');
     Route::delete('/rents/request/validation/{location_request}', [\App\Http\Controllers\AccountController::class, 'request_validated'])->name('request.validated');
     Route::get('/rents/close/', [\App\Http\Controllers\AccountController::class, 'close_list'])->name('rents.close');
@@ -107,6 +142,14 @@ Route::get('announce/{slug}-{announce}', [\App\Http\Controllers\AnnounceControll
 Route::post('announce/{announce}', [\App\Http\Controllers\AnnounceController::class, 'contact'])->name('announce.contact')->where([
     'announce' => $idRegex
 ]);
+
+// Avis
+Route::get('/reviews/{announce}/create/{token}', [\App\Http\Controllers\ReviewController::class, 'create'])
+    ->middleware('auth')
+    ->name('reviews.create');
+Route::post('/reviews/store', [\App\Http\Controllers\ReviewController::class, 'store'])
+    ->middleware('auth')
+    ->name('reviews.store');
 
 // Admin
 Route::prefix('admin')->name('admin.')

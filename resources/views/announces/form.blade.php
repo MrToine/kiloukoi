@@ -5,7 +5,7 @@
 @section('content')
     <div class="container">
         <h1>@yield('title')</h1>
-        <form class="vstack gap-2" action="{{ route('announce.store', ['announce' => $announce]) }}" method="post">
+        <form class="vstack gap-2" action="{{ route($announce->exists ? 'announce.update' : 'announce.store', ['announce' => $announce]) }}" method="post">
 
             @csrf
             @method($announce->exists ? 'put' : 'post')
@@ -18,7 +18,7 @@
                     @include('shared.input', ['class' => 'col', 'type' => 'number', 'label' => 'prix', 'name' => 'price', 'value' => $announce->price])
                 </div>
             </div>
-            @include('shared.input', ['type' => 'textarea', 'class' => 'col', 'name' => 'description', 'value' => $announce->description])
+            @include('shared.input', ['type' => 'textarea', 'class' => 'col', 'label' => 'Contenu de l\'annonce', 'name' => 'description', 'value' => $announce->description])
             <div class="row">
                 @include('shared.input', ['class' => 'col', 'label' => 'adresse', 'name' => 'adress', 'value' => $announce->adress])
                 @include('shared.input', ['class' => 'col', 'label' => 'code postale', 'name' => 'postalcode', 'value' => $announce->postalcode])

@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         //User::factory(10)->create();
         //Category::factory()->count(5)->create();
         //Option::factory()->count(10)->create();
-        LocationRequest::factory()->count(5)->create();
+        Announce::factory()->count(5)->create();
 
     }
 }

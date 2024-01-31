@@ -15,12 +15,15 @@ class RequestCancelationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $token;
+
     /**
      * Create a new message instance.
      */
-    public function __construct(public LocationRequest $location_request)
+    public function __construct(public LocationRequest $location_request, $token)
     {
         $this->mailto = $location_request->tenant->email;
+        $this->token = $token;
     }
 
     /**

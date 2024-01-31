@@ -87,4 +87,55 @@ class AnnounceController extends Controller
         $announce->categories()->sync($validation['categories']);
         return to_route('announce.index')->with('success', 'L\'annonce à bien été créer mais elle dois être validée par un modérateur. La décision vous sera envoyée par mail dans les plus bref délai. Restez à l\'affût !');
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Announce $announce)
+    {
+        if ($announce->user_id == $this->getUser()->id) {
+            return view('announces.form', [
+                'announce' => $announce,
+                'categories' => Category::pluck('name', 'id'),
+                'options' => Option::pluck('name', 'id'),
+            ]);
+        }
+
+        return to_route('website.index');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(AnnounceFormRequest $request, Announce $announce)
+    {
+        if($announce->user_id == $this->getUser()->id) {
+            $announce->update($request->validated());
+            $announce->options()->sync($request->validated('options'));
+            $announce->categories()->sync($request->validated('categories'));
+            return to_route('account.rents.list')->with('success', 'L\'annonce à bien été modifié !');
+        }
+
+        return to_route('website.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Announce $announce)
+    {
+        $privateBox = $announce->privateBox;
+
+        if ($privateBox) {
+            if( $privateBox->messages()) {
+                $privateBox->messages()->delete();
+            }
+            $privateBox->delete();
+        }
+
+        $announce->categories()->detach();
+        $announce->options()->detach();
+        $announce->delete();
+        return to_route('account.rents.list')->with('success', 'L\'annonce à bien été supprimer !');
+    }
 }

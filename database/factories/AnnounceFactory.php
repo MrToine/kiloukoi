@@ -26,7 +26,8 @@ class AnnounceFactory extends Factory
             'postalcode' => $this->faker->postcode,
             'city' => $this->faker->city,
             'availability' => $this->faker->boolean,
-            'user_id' => $this->faker->numberBetween(1, 12),
+            'user_id' => $this->faker->numberBetween(1, 2),
+            'check_moderation' => 0,
         ];
     }
 

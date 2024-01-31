@@ -18,6 +18,7 @@
                 @include('shared.input', ['type' => 'email', 'class' => 'col', 'label' => 'Email', 'name' => 'email'])
                 @include('shared.input', ['type' => 'password', 'class' => 'col', 'label' => 'Mot de passe', 'name' => 'password'])
                 @include('shared.input', ['type' => 'password', 'class' => 'col', 'label' => 'Retapez votre mot de passe', 'name' => 'verif_password'])
+                <p>En vous inscrivant, vous acceptez les <a href="/conditions-generales-dutilisation">CGU</a> et la <a href="/politique-de-confidentialite">politique de confidentialité</a></p>
                 <div>
                     <button class="btn btn-success">Inscription</button>
                     <a href="{{ route('login') }}">Déja un compte ?</a>
