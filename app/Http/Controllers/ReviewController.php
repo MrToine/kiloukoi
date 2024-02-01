@@ -32,7 +32,8 @@ class ReviewController extends Controller
             $review = new Review();
             return view('reviews.create', [
                 'user' => $this->getUser(),
-                'announce' => $announce
+                'announce' => $announce,
+                'token' => $token
             ]);
         }else{
             return to_route('website.index');
@@ -44,7 +45,12 @@ class ReviewController extends Controller
      */
     public function store(ReviewRequest $request)
     {
-        //
+
+        Review::create($request->validated());
+
+        TemporaryToken::where('token', $request->input('token'))->delete();
+
+        return view('reviews.success');
     }
 
     /**

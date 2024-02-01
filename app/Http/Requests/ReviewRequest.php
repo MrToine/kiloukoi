@@ -22,8 +22,10 @@ class ReviewRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'note' => ['required'],
+            'note' => ['required', 'numeric', 'between:0,5'],
             'comment' => ['required', 'min:5'],
+            'user_id' => ['required', 'numeric'],
+            'announce_id' => ['required', 'numeric']
         ];
     }
 }

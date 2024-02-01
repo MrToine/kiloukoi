@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\LocationRequest;
 use App\Models\Announce;
+use App\Models\Review;
 use App\Models\Category;
 use App\Models\Option;
 
@@ -32,7 +33,7 @@ class AnnounceController extends Controller
 
         return view('announces.index', [
             'announces' => $query->paginate(16),
-            'input' => $request->validated()
+            'input' => $request->validated(),
         ]);
     }
 

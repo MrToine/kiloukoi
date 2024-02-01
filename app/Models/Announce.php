@@ -55,4 +55,8 @@ class Announce extends Model
     public function getSlug(): String {
         return Str::slug($this->title);
     }
+
+    public function review(): BelongsToMany {
+        return $this->belongsToMany(Review::class, 'announce_id');
+    }
 }

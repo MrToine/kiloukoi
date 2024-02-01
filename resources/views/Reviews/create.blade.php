@@ -28,6 +28,21 @@
                                     Attribuez une note générale sur le service offert
                                 </div>
                                 @include('shared.input', [
+                                    'type' => 'hidden',
+                                    'name' => 'token',
+                                    'value' => $token,
+                                ])
+                                @include('shared.input', [
+                                    'type' => 'hidden',
+                                    'name' => 'user_id',
+                                    'value' => $user->id,
+                                ])
+                                @include('shared.input', [
+                                    'type' => 'hidden',
+                                    'name' => 'announce_id',
+                                    'value' => $announce->id
+                                ])
+                                @include('shared.input', [
                                     'type' => 'number',
                                     'class' => 'col align-self-start',
                                     'name' => 'note',

@@ -13,6 +13,11 @@ class Review extends Model
         'announce_id',
         'user_id',
         'note',
-        'content'
+        'comment'
     ];
+
+    public function announce()
+    {
+        return $this->belongsTo(Announce::class);
+    }
 }
