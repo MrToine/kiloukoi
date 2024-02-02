@@ -36,7 +36,7 @@ class AuthController extends Controller
 
         return back()->withErrors([
             'email' => 'Identifiants incorrect ou compte non vérifié'
-        ])->onlyInput('email')->with('error', 'Si votre compte n\'a pas été validé, vérifiez votre boîte mail. Il est possible que le courrier sois dans les spams.');
+        ])->onlyInput('email')->with('error', 'Si votre compte n\'a pas été validé, vérifiez votre boîte mail. Il est possible que le courrier soit dans les spams. Vérifier bien vous courrier indésirables.');
     }
 
     public function register() {
@@ -66,7 +66,7 @@ class AuthController extends Controller
 
             Mail::send(new RegistrationMail($newUser));
 
-            return to_route('login')->with('success', 'Inscription réussie ! Pour vous connecter, vérifiez vos messages.');
+            return to_route('login')->with('success', 'Inscription réussie ! Pour vous connecter, vérifiez vos messages.  Il est possible que le courrier soit dans les spams. Vérifier bien vous courrier indésirables.');
         }
 
         return back()->withErrors([

@@ -4,10 +4,10 @@
 
 @section('content')
     <div class="row">
-        <div class="col-6" style="position: relative; overflow: hidden; max-height: 100vh;">
+        <div class="col-6 d-none d-md-block" style="position: relative; overflow: hidden; max-height: 100vh;">
             <img src="{{ asset('images/website/bg-login.png') }}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
-        <div class="col-4">
+        <div class="col col-md-4">
             <h1>@yield('title')</h1>
 
             @include('shared.flash')

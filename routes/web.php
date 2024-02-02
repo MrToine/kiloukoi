@@ -90,6 +90,10 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])
     ->name('website.index')
     ->breadcrumbs(fn (Trail $trail) => $trail->push('Home', route('website.index')));
 
+// contact
+Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'showForm'])->name('contact.form');
+Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'submitForm'])->name('contact.submit');
+
 Route::get('/faker', [\App\Http\Controllers\HomeController::class, 'create_users_default']);
 
 // membre

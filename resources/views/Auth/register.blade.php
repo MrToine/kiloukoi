@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="row ms-auto">
-        <div class="col-4 ms-auto">
+        <div class="col col-md-4 ms-auto">
             <h1>@yield('title')</h1>
             <div class="alert alert-secondary">
                 <p>Explorez notre communauté pour louer du matériel entre particuliers. Que vous ayez besoin d'outils, d'équipement sportif, ou d'autres articles, nous facilitons le processus de location.</p>
@@ -25,7 +25,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-6 ms-auto" style="position: relative; overflow: hidden; max-height: 100vh;">
+        <div class="col-6 ms-auto d-none d-md-block" style="position: relative; overflow: hidden; max-height: 100vh;">
             <img src="{{ asset('images/website/bg-register.png') }}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
     </div>

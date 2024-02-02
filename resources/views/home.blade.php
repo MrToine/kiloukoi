@@ -16,6 +16,11 @@
 
     <div class="container">
         @include('shared.flash')
+        <div class="alert alert-warning">
+            Le site étant ouvert depuis peu, il est possible de subir quelques légers bugs (rien de bien méchant promis !).<br>
+            Si vous avez rencontré un problème sur notre site, veuillez nous en informer en remplissant le formulaire dans le lien ci-dessous.
+            Nous prendrons les mesures nécessaires pour résoudre le problème.<br><a href="{{ route('contact.form') }}" class="nav-link link-info">Contacter un administrateur</a>
+        </div>
         <h2>Les dernières offres de location</h2>
         <div class="row">
             @foreach ($announces as $announce)
