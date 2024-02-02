@@ -90,6 +90,8 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])
     ->name('website.index')
     ->breadcrumbs(fn (Trail $trail) => $trail->push('Home', route('website.index')));
 
+Route::get('/images/{path}', [App\Http\Controllers\PictureController::class, 'show'])->where('path', '.*');
+
 // contact
 Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'showForm'])->name('contact.form');
 Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'submitForm'])->name('contact.submit');
@@ -119,6 +121,7 @@ Route::delete('/announce/destroy/{announce}', [\App\Http\Controllers\AnnounceCon
 Route::prefix('user/account')->name('account.')
     ->middleware(['auth', 'role:user|admin'])
     ->group(function () {
+    $idRegex = '[0-9]+';
     Route::get('/', [\App\Http\Controllers\AccountController::class, 'index'])->name('index');
 
     Route::get('/mypage', [\App\Http\Controllers\AccountController::class, 'mypage'])->name('mypage');
@@ -128,6 +131,9 @@ Route::prefix('user/account')->name('account.')
     Route::post('/messages/{box_id}', [\App\Http\Controllers\MessageController::class, 'store'])->name('messages.store');
 
     Route::get('/announces', [\App\Http\Controllers\AccountController::class, 'announces'])->name('announces');
+    Route::delete('/picture/{picture}', [\App\Http\Controllers\PictureController::class, 'destroy'])->name('picture.destroy')->where([
+        'picture' => $idRegex,
+    ]);
 
     Route::get('/rents', [\App\Http\Controllers\AccountController::class, 'rents'])->name('rents');
     Route::get('/rents/list', [\App\Http\Controllers\AccountController::class, 'rents_list'])->name('rents.list');

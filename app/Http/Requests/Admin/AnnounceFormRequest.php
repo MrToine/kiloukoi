@@ -31,6 +31,8 @@ class AnnounceFormRequest extends FormRequest
             'availability' => ['required', 'boolean'],
             'options' => ['array', 'exists:options,id', 'required'],
             'categories' => ['array', 'exists:categories,id', 'required'],
+            'pictures' => ['array'],
+            'pictures.*' => ['image', 'max:4000']
         ];
     }
 }

@@ -8,6 +8,10 @@
                 @endif
             @endforeach
         @endif
+
+        @if ($announce->getFirstPicture())
+            <img src="{{ $announce->getFirstPicture()->getUrl(360, 230) }}" alt="" class="w-100">
+        @endif
     <div class="card-body">
         <h5 class="card-title">
             <a href="{{ route('announce.show', ['slug' => $announce->getSlug(), 'announce' => $announce]) }}">{{ $announce->title }}</a>

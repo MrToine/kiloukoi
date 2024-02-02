@@ -26,6 +26,7 @@
                     <button class="btn btn-success">Connexion</button>
                     <a href="{{ route('register') }}">Pas encore inscrit ?</a>
                 </div>
+                @include('shared.checkbox', ['class' => 'col', 'label' => 'Rester connecté lors de mes prochaines visites', 'name' => 'always_connected', 'value' => 1])
             </form>
         </div>
 

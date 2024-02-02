@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\CheckModerationAnnounceMail;
 
 use App\Models\Announce;
+use App\Models\Picture;
 use App\Models\Option;
 use App\Models\Category;
 
@@ -48,6 +49,7 @@ class AnnounceController extends AdminController
         $announce = auth()->user()->announces()->create($request->validated());
         $announce->options()->sync($request->validated('options'));
         $announce->categories()->sync($request->validated('categories'));
+        $announce->attachFiles($request->validated('pictures'));
         return to_route('admin.announce.index')->with('success', 'L\'annonce à bien été créer !');
     }
 
@@ -71,6 +73,7 @@ class AnnounceController extends AdminController
         $announce->update($request->validated());
         $announce->options()->sync($request->validated('options'));
         $announce->categories()->sync($request->validated('categories'));
+        $announce->attachFiles($request->validated('pictures'));
         return to_route('admin.announce.index')->with('success', 'L\'annonce à bien été modifié !');
     }
 
@@ -90,6 +93,8 @@ class AnnounceController extends AdminController
 
         $announce->categories()->detach();
         $announce->options()->detach();
+        Picture::destroy($announce->pictures->pluck('id'));
+
         $announce->delete();
         return to_route('admin.announce.index')->with('success', 'L\'annonce à bien été supprimer !');
     }

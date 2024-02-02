@@ -30,7 +30,7 @@
 
                 @auth
                     <ul class="navbar-nav">
-                        <li class="nav-item d-lg-none">
+                        <li class="nav-item">
                             <a href="{{ route('announce.create') }}" class="btn btn-success">Proposer une location !</a>
                         </li>
                         <li class="nav-item">

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\LocationRequest;
 use App\Models\Announce;
+use App\Models\Picture;
 use App\Models\Review;
 use App\Models\Category;
 use App\Models\Option;
@@ -20,7 +21,7 @@ use App\Mail\ContactAnnounceMail;
 class AnnounceController extends Controller
 {
     public function index(SearchAnnounceRequest $request) {
-        $query = Announce::query()->orderBy('id', 'desc')->with('options')->where('check_moderation', true)->where('availability', true);
+        $query = Announce::query()->with('pictures')->orderBy('id', 'desc')->with('options')->where('check_moderation', true)->where('availability', true);
         if($price = $request->validated('price')) {
             $query = $query->where('price', '<=', $price);
         }
@@ -86,6 +87,7 @@ class AnnounceController extends Controller
         $announce = auth()->user()->announces()->create($validation);
         $announce->options()->sync($validation['options']);
         $announce->categories()->sync($validation['categories']);
+        $announce->attachFiles($request->validated('pictures'));
         return to_route('announce.index')->with('success', 'L\'annonce à bien été créer mais elle dois être validée par un modérateur. La décision vous sera envoyée par mail dans les plus bref délai. Restez à l\'affût !');
     }
 
@@ -114,6 +116,7 @@ class AnnounceController extends Controller
             $announce->update($request->validated());
             $announce->options()->sync($request->validated('options'));
             $announce->categories()->sync($request->validated('categories'));
+            $announce->attachFiles($request->validated('pictures'));
             return to_route('account.rents.list')->with('success', 'L\'annonce à bien été modifié !');
         }
 
@@ -136,6 +139,8 @@ class AnnounceController extends Controller
 
         $announce->categories()->detach();
         $announce->options()->detach();
+        Picture::destroy($announce->pictures->pluck('id'));
+
         $announce->delete();
         return to_route('account.rents.list')->with('success', 'L\'annonce à bien été supprimer !');
     }

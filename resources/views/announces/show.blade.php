@@ -14,9 +14,28 @@
         </h6>
         <hr>
         <div class="row">
-            <div class="col-8">
+            <div class="col-4">
                 <h2>Tarif journalier</h2>
                 <div class="text-primary fw-bold" style="font-size:4rem;">{{ $announce->price }}€</div>
+            </div>
+            <div class="col-4">
+                <div id="carousel" class="carousel slide" data-bs-ride="carousel" style="max-width:800px;">
+                    <div class="carousel-inner">
+                        @foreach ($announce->pictures as $k => $picture)
+                            <div class="carousel-item {{ $k == 0 ? 'active' : ''}}">
+                                <img src="{{ $picture->getUrl(550, 550) }}" alt="" class="w-100">
+                            </div>
+                        @endforeach
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
             </div>
             <div class="col-4">
                 <div class="row">

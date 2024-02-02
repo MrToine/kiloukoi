@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
@@ -28,6 +29,10 @@ class AuthController extends Controller
 
         if ($user && $user->is_verified) {
             if (Auth::attempt($credentials)) {
+                if($request->input('always_connected') == true) {
+                    $user->remember_token = Str::random(60);
+                    $user->save();
+                }
                 $request->session()->regenerate();
 
                 return redirect()->back()->with('success', 'Vous êtes maintenant connecté.');

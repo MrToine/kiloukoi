@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use Illuminate\Support\Str;
-
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 use App\Models\User;
 use App\Models\Option;
 use App\Models\Category;
+use App\Models\Picture;
 use App\Models\LocationRequests;
 
 class Announce extends Model
@@ -36,6 +37,34 @@ class Announce extends Model
 
     public function categories(): BelongsToMany {
         return $this->belongsToMany(Category::class, 'category_announce');
+    }
+
+    public function pictures(): HasMany {
+        return $this->hasMany(Picture::class);
+    }
+
+    public function getFirstPicture(): ?Picture {
+        return $this->pictures[0] ?? null;
+    }
+
+    /**
+     * @param UploadedFile[] $files
+     */
+    public function attachFiles(array $files) {
+        $pictures = [];
+        foreach($files as $file) {
+            if($file->getError()) {
+                continue;
+            }
+            $filename = $file->store('announces/' . $this->id, 'public');
+
+            $pictures[] = [
+                'filename' => $filename
+            ];
+        }
+        if (count($pictures) > 0) {
+            $this->pictures()->createMany($pictures);
+        }
     }
 
     public function user()

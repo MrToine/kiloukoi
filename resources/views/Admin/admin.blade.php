@@ -8,6 +8,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <style>
+        button.button-delete {
+            background: rgba(255, 0, 0, 0.5);
+            border: none;
+            color: white;
+            min-height:50px;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
@@ -22,7 +32,7 @@
                 $route = request()->route()->getName();
             @endphp
 
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a @class(['nav-link', 'active' => str_contains($route, 'admin.home')]) href="{{ route('admin.home') }}">Gestion</a></li>
                     <li class="nav-item"><a @class(['nav-link', 'active' => str_contains($route, 'admin.announce')]) href="{{ route('admin.announce.index') }}">Requêtes @include('admin.shared.requests_notification')</a></li>
