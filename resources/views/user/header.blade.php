@@ -7,13 +7,13 @@
         $userRoute = request()->route()->getName();
     @endphp
 
-    <li class="nav-item">
+    <!--<li class="nav-item">
         <a class="nav-link {{ str_contains($userRoute, '.mypage') ? 'active' : '' }}" href="{{ route('account.mypage') }}">Ma page</a>
     </li>
 
     <li class="nav-item">
         <a class="nav-link {{ str_contains($userRoute, '.params') ? 'active' : '' }}" href="#">Paramètres</a>
-    </li>
+    </li>-->
 
     <li class="nav-item">
         <a class="nav-link {{ str_contains($userRoute, '.announces') ? 'active' : '' }}" href="{{ route('account.announces') }}">

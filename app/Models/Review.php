@@ -20,4 +20,8 @@ class Review extends Model
     {
         return $this->belongsTo(Announce::class);
     }
+
+    public function user() {
+        return $this->BelongsTo(User::class);
+    }
 }

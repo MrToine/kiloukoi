@@ -82,4 +82,8 @@ class User extends Authenticatable
 
         return $ownerUnreadCount + $tenantUnreadCount;
     }
+
+    public function review() {
+        return $this->hasMany(Review::class, 'user_id');
+    }
 }

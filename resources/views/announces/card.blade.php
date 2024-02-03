@@ -29,7 +29,7 @@
                     @endforeach
                 </div>
                 <div class="col">
-                    0 avis
+                    <a href="{{ route('announce.show', ['slug' => $announce->getSlug(), 'announce' => $announce]) }}#list-reviews">lire les {{ $announce->reviews->count() }} avis</a>
                 </div>
             </div>
         </p>

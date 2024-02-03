@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\Announce;
+use App\Models\Review;
 use App\Models\Category;
 use App\Models\Option;
 
@@ -19,7 +20,9 @@ class HomeController extends Controller
 {
     public function index() {
         $announces = Announce::with('pictures')->orderBy('created_at', 'desc')->where('check_moderation', true)->where('availability', true)->limit(4)->get();
-        return view('home', ['announces' => $announces]);
+        return view('home', [
+            'announces' => $announces
+        ]);
     }
 
     public function test_email() {

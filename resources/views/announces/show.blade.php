@@ -1,3 +1,17 @@
+@php
+    $averageRating = $announce->reviews->avg('note');
+    $roundedAverage = round($averageRating, 2);
+
+    if ($roundedAverage > 4) {
+        $color = "success";
+    }
+    elseif ($roundedAverage > 2.5 && $roundedAverage < 4) {
+        $color = "warning";
+    }
+    else {
+        $color = "danger";
+    }
+@endphp
 @extends('layout')
 
 @section('title', $announce->title)
@@ -6,6 +20,7 @@
     <div class="container">
         <h1>{{ $announce->title }}</h1>
         <h5>{{ $announce->postalcode }} - {{ $announce->city }}</h5>
+        Avis : <span class="text-{{ $color }}">{{ $roundedAverage }}/5</span> - <a href="#list-reviews">Lire les avis</a>
         <h6>
             Dans
             @foreach ($announce->categories as $category)
@@ -77,6 +92,18 @@
                 </form>
             </div>
         @endauth
+        <div class="mt-4" id="list-reviews">
+            <h4>Liste des avis</h4>
+            @foreach ($announce->reviews as $review)
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $review->user->name }}</h5>
+                        <p class="card-text">{{ $review->comment }}</p>
+                        <p class="card-text"><em><strong>Note :</strong> {{ $review->note }}/5</em></p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </div>
 
 @endsection

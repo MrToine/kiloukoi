@@ -85,6 +85,10 @@ class Announce extends Model
         return Str::slug($this->title);
     }
 
+    public function reviews(): HasMany {
+        return $this->hasMany(Review::class, 'announce_id');
+    }
+
     public function review(): BelongsToMany {
         return $this->belongsToMany(Review::class, 'announce_id');
     }
