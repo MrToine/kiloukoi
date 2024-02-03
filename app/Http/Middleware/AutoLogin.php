@@ -16,7 +16,7 @@ class AutoLogin
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
         // Vérifier si le cookie "remember_token" est présent dans la requête
         $rememberToken = $request->cookie('remember_token');
