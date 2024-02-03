@@ -7,7 +7,8 @@
     <title>kiloukoi : @yield('title')</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+    <script type="text/javascript" src="https://cache.consentframework.com/js/pa/37783/c/UZKH3/stub"></script>
+    <script type="text/javascript" src="https://choices.consentframework.com/js/pa/37783/c/UZKH3/cmp" async></script>    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
     <link rel="icon" href="{{ asset('images/website/favicon.png') }}" type="image/x-icon">
@@ -38,6 +39,39 @@
             text-align: center;
             padding: 50px;
         }
+        #gdpr-banner {
+            background-color: #343a40; /* Couleur de fond */
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+            padding: 15px;
+        }
+
+        #gdpr-banner a {
+            color: #ffffff; /* Couleur du texte */
+        }
+
+        #gdpr-banner a:hover {
+            color: #ffffff; /* Couleur du texte au survol */
+            text-decoration: underline; /* Souligner au survol */
+        }
+
+        #gdpr-accept {
+            background-color: #007bff; /* Couleur du bouton Accepter */
+            color: #ffffff; /* Couleur du texte du bouton Accepter */
+            border-color: #007bff; /* Couleur de la bordure du bouton Accepter */
+            transition: background-color 0.3s ease; /* Transition de couleur au survol */
+        }
+
+        #gdpr-accept:hover {
+            background-color: #0056b3; /* Couleur du bouton Accepter au survol */
+        }
+        .hidden {
+            display:none;
+        }
     </style>
 </head>
 <body>
@@ -49,7 +83,7 @@
         <div class="row">
             <div class="col">
                 <h6>kiloukoi.be</h6>
-                <ul classe="list-group list-group-flush">
+                <ul class="list-group list-group-flush">
                     <li class="list-group"><a href="/pourquoi-kiloukoi" class="link-secondary">Pourquoi kiloukoi ?</a></li>
                     <li class="list-group"><a href="/a-propos" class="link-secondary">Fonctionnement</a></li>
                     <li class="list-group"><a href="" class="link-secondary">Blog</a></li>
@@ -58,7 +92,7 @@
             </div>
             <div class="col">
                 <h6>Louez un objet</h6>
-                <ul classe="list-group list-group-flush">
+                <ul class="list-group list-group-flush">
                     @foreach ($getAnnouncesCategories as $category)
                         <li class="list-group"><a href="" class="link-secondary">{{ $category->name }}</a></li>
                     @endforeach
@@ -66,13 +100,13 @@
             </div>
             <div class="col">
                 <h6>Assistance</h6>
-                <ul classe="list-group list-group-flush">
+                <ul class="list-group list-group-flush">
                     <li class="list-group"><a href="/pourquoi-mon-annonce-est-refusee" class="link-secondary">Mon annonce n'a pas été validée</a></li>
                 </ul>
             </div>
             <div class="col">
                 <h6>Informations</h6>
-                <ul classe="list-group list-group-flush">
+                <ul class="list-group list-group-flush">
                     <li class="list-group"><a href="/politique-de-confidentialite" class="link-secondary">Politique de confidentialité</a></li>
                     <li class="list-group"><a href="/etre-un-bon-locataire" class="link-secondary">Être un bon locataire</a></li>
                     <li class="list-group"><a href="" class="link-secondary">Guide du parfait annonceur</a></li>

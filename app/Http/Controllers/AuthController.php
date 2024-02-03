@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
@@ -32,6 +33,9 @@ class AuthController extends Controller
                 if($request->input('always_connected') == true) {
                     $user->remember_token = Str::random(60);
                     $user->save();
+
+                    $rememberCookie = Cookie::make('remember_token', $user->remember_token, 60 * 24 * 365);
+                    return redirect()->back()->with('success', 'Vous êtes maintenant connecté.')->withCookie($rememberCookie);
                 }
                 $request->session()->regenerate();
 

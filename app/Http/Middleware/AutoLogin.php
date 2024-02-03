@@ -4,7 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+
+use App\Models\User;
 
 class AutoLogin
 {
@@ -15,15 +18,19 @@ class AutoLogin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $token = $request->header('Authorization');
+        // Vérifier si le cookie "remember_token" est présent dans la requête
+        $rememberToken = $request->cookie('remember_token');
 
-        if($token) {
-            $user = User::where('api_token', $token)->first();
+        if ($rememberToken) {
+            // Rechercher l'utilisateur par le remember_token
+            $user = User::where('remember_token', $rememberToken)->first();
 
-            if($user) {
-                auth()->login($user);
+            if ($user) {
+                // Authentifier l'utilisateur
+                Auth::login($user);
             }
         }
+
         return $next($request);
     }
 }
