@@ -31,7 +31,6 @@ class ContactAnnounceMail extends Mailable
     {
         return new Envelope(
             to: $this->mailto,
-            from: $this->mailfrom,
             subject: 'Concernant votre annonce !',
         );
     }
