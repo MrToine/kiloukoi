@@ -40,7 +40,7 @@
                                         <form action="{{ route('account.request.destroy', ['location_request' => $request]) }}" method="post">
                                             @csrf
                                             @method('delete')
-                                            @include('Shared.input', ['type' => 'hidden', 'name' => 'location_type', 'value' => 'end'])
+                                            @include('shared.input', ['type' => 'hidden', 'name' => 'location_type', 'value' => 'end'])
                                             <button class="btn btn-warning">Annuler la location</button>
                                         </form>
                                     </div>
