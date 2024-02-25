@@ -15,6 +15,7 @@ use App\Http\Requests\PasswordResetRequest;
 
 use App\Models\User;
 use App\Models\TemporaryToken;
+use Illuminate\Support\Facades\Crypt;
 
 use Spatie\Permission\Models\Role;
 
@@ -36,7 +37,8 @@ class AuthController extends Controller
         if ($user && $user->is_verified) {
             if (Auth::attempt($credentials)) {
                 if($request->input('always_connected') == true) {
-                    $user->remember_token = Str::random(60);
+                    $rememberToken = Str::random(60);
+                    $user->remember_token = Crypt::encryptString($rememberToken);
                     $user->save();
 
                     $rememberCookie = Cookie::make('remember_token', $user->remember_token, 60 * 24 * 365);
