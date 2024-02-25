@@ -10,12 +10,17 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\RecuperationRequest;
+use App\Http\Requests\PasswordResetRequest;
 
 use App\Models\User;
+use App\Models\TemporaryToken;
+
 use Spatie\Permission\Models\Role;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RegistrationMail;
+use App\Mail\RecuperationMail;
 
 class AuthController extends Controller
 {
@@ -104,5 +109,58 @@ class AuthController extends Controller
 
         return to_route('login')->with('error', 'Aucun utilisateur trouvé avec le token spécifié.');
 
+    }
+
+    public function recuperation_password() {
+        return view('auth.recuperation_password');
+    }
+
+    public function dorecuperation_password(RecuperationRequest $request) {
+        $credentials = $request->validated();
+        $user = User::where('email', $credentials['email'])->first();
+
+        if($user) {
+            $token = TemporaryToken::create([
+                'user_id' => $user->id,
+                'token' => Str::random(60),
+            ]);
+
+            Mail::send(new RecuperationMail($user, $token->token));
+        }
+
+        return to_route('recuperation_password')->with('success', 'Si cet email existe, vous aller recevoir un message afin de modifier votre mot de passe.');
+    }
+
+    public function recuperation_password_check(Request $request) {
+        $token = TemporaryToken::where('token', $request->token)->first();
+
+        if (!$token) {
+            return abort(404);
+        }
+
+        return view('auth.password_reset', ['token' => $token]);
+    }
+
+    public function dorecuperation_password_check(PasswordResetRequest $request) {
+        $token = TemporaryToken::where('token', $request->token)->first();
+
+        if (!$token) {
+            return abort(404);
+        }
+
+        if($request->validated('password') == $request->validated('verif_password')) {
+            $user = User::find($token->user_id);
+            $user->password = Hash::make($request->password);
+            $user->save();
+
+            $token->delete();
+
+            return to_route('login')->with('success', 'Mot de passe modifié avec succès ! Vous pouvez maintenant vous connecter.');
+        }
+
+        return back()->withErrors([
+            'password' => 'Les mots de passe ne correspondent pas',
+            'verif_password' => 'Les mots de passe ne correspondent pas'
+        ]);
     }
 }

@@ -28,6 +28,7 @@
                 </div>
                 @include('shared.checkbox', ['class' => 'col', 'label' => 'Rester connecté lors de mes prochaines visites', 'name' => 'always_connected', 'value' => 1])
             </form>
+            <a href="{{ route('recuperation_password') }}">Récupération mot de passe</a>
         </div>
 
     </div>

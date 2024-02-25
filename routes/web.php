@@ -96,8 +96,6 @@ Route::get('/images/{path}', [App\Http\Controllers\PictureController::class, 'sh
 Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'showForm'])->name('contact.form');
 Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'submitForm'])->name('contact.submit');
 
-Route::get('/faker', [\App\Http\Controllers\HomeController::class, 'create_users_default']);
-
 // membre
 Route::get('user/register', [\App\Http\Controllers\AuthController::class, 'register'])->middleware('guest')->name('register');
 Route::post('user/register', [\App\Http\Controllers\AuthController::class, 'doregister']);
@@ -105,7 +103,12 @@ Route::get('user/validation/{token}', [\App\Http\Controllers\AuthController::cla
     ->middleware('guest')
     ->name('user.validation_account');
 
-Route::get('user/{id}', [\App\Http\Controllers\AuthController::class, 'login'])->middleware('guest')->name('user.profile');
+//Route::get('user/{id}', [\App\Http\Controllers\AuthController::class, 'login'])->middleware('guest')->name('user.profile');
+
+Route::get('user/recuperation', [\App\Http\Controllers\AuthController::class, 'recuperation_password'])->middleware('guest')->name('recuperation_password');
+Route::post('user/recuperation', [\App\Http\Controllers\AuthController::class, 'dorecuperation_password']);
+Route::get('user/recuperation/check/{token}', [\App\Http\Controllers\AuthController::class, 'recuperation_password_check'])->middleware('guest')->name('recuperation_password_check');
+Route::post('user/recuperation/check/{token}', [\App\Http\Controllers\AuthController::class, 'dorecuperation_password_check']);
 
 Route::get('user/login', [\App\Http\Controllers\AuthController::class, 'login'])->middleware('guest')->name('login');
 Route::post('user/login', [\App\Http\Controllers\AuthController::class, 'dologin']);
@@ -169,7 +172,7 @@ Route::prefix('admin')->name('admin.')
         ->name('home');
     Route::get('/announce/{announce}/check_moderation', [\App\Http\Controllers\Admin\AnnounceController::class, 'check_moderation'])
         ->name('announce.check_moderation');
-    Route::resource('user', \App\Http\Controllers\Admin\UserController::class)
+    Route::resource('user', \App\Http\Controllers\AccountController::class)
         ->except(['show']);
     Route::resource('announce', \App\Http\Controllers\Admin\AnnounceController::class)
         ->except(['show']);

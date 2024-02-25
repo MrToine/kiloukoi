@@ -17,7 +17,7 @@
     <div class="container">
         @include('shared.flash')
         <div class="alert alert-warning">
-            Le site étant ouvert depuis peu, il est possible de subir quelques légers bugs (rien de bien méchant, promis !).<br>
+            <strong>Mise à jour 25/02/2024 : </strong><em>Ajout de la fonctionnalité de récupération de mot de passe en cas d'oubli de ce dernier.</em>.<br>
             Si vous avez rencontré un problème sur notre site, veuillez nous en informer en remplissant le formulaire dans le lien ci-dessous.
             Nous prendrons les mesures nécessaires pour résoudre le problème.<br>
             <a href="{{ route('contact.form') }}" class="nav-link link-info">Contacter un administrateur</a>
