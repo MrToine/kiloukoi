@@ -22,6 +22,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RegistrationMail;
 use App\Mail\RecuperationMail;
+use App\Mail\AdminNewUserMail;
 
 class AuthController extends Controller
 {
@@ -105,6 +106,9 @@ class AuthController extends Controller
             $user->update([
                 'is_verified' => 1,
             ]);
+
+        Mail::send(new AdminNewUserMail($user));
+
 
         return to_route('login')->with('success', 'Le compte à bien été validé. Inscription terminée.');
         }

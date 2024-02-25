@@ -17,6 +17,7 @@ use App\Http\Requests\ContactAnnounceRequest;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactAnnounceMail;
+use App\Mail\AdminNewAnnounceMail;
 
 class AnnounceController extends Controller
 {
@@ -87,7 +88,12 @@ class AnnounceController extends Controller
         $announce = auth()->user()->announces()->create($validation);
         $announce->options()->sync($validation['options']);
         $announce->categories()->sync($validation['categories']);
-        $announce->attachFiles($request->validated('pictures'));
+        if ($request->has('pictures')) {
+            $announce->attachFiles($request->validated('pictures'));
+        }
+
+        Mail::send(new AdminNewAnnounceMail($announce));
+
         return to_route('announce.index')->with('success', 'L\'annonce à bien été créer mais elle dois être validée par un modérateur. La décision vous sera envoyée par mail dans les plus bref délai. Restez à l\'affût !');
     }
 
