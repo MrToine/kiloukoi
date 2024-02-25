@@ -19,7 +19,7 @@ use App\Mail\TestMail;
 class HomeController extends Controller
 {
     public function index() {
-        $announces = Announce::with('pictures')->orderBy('created_at', 'desc')->where('check_moderation', true)->where('availability', true)->limit(4)->get();
+        $announces = Announce::with('pictures')->orderBy('created_at', 'desc')->where('check_moderation', true)->where('availability', true)->limit(6)->get();
         return view('home', [
             'announces' => $announces
         ]);
