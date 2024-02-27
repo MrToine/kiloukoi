@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         button.button-delete {
             background: rgba(255, 0, 0, 0.5);
@@ -17,10 +18,16 @@
             color: white;
             min-height:50px;
         }
+        .mt-7 {
+            margin-top: 6rem; /* ou la valeur de marge supérieure souhaitée */
+        }
+        .mt-6 {
+            margin-top: 5rem; /* ou la valeur de marge supérieure souhaitée */
+        }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+    <nav class="navbar navbar-dark bg-dark navbar-expand-lg z-index-2 fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ route('admin.home') }}">
                 <img src="{{ asset('images/admin/logo_horizontal.png') }}" alt="" style="height:50px;">
@@ -56,8 +63,7 @@
             </div>
         </div>
     </nav>
-
-    <div class="container mt-5">
+    <div class="container mt-7">
         @include('shared.flash')
         @include('admin.shared.breadcrumb')
 

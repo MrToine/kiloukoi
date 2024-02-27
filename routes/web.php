@@ -164,6 +164,12 @@ Route::post('/reviews/store', [\App\Http\Controllers\ReviewController::class, 's
     ->middleware('auth')
     ->name('reviews.store');
 
+// Newsletter
+Route::get('/newsletter/unfollow/{mail}', [\App\Http\Controllers\NewsletterController::class, 'unfollow'])
+    ->name('newsletter.unfollow');
+Route::post('/newsletter/unfollow/{mail}', [\App\Http\Controllers\NewsletterController::class, 'dounfollow'])
+    ->name('newsletter.unfollow.applicate');
+
 // Admin
 Route::prefix('admin')->name('admin.')
     ->middleware(['role:admin'])
@@ -182,6 +188,12 @@ Route::prefix('admin')->name('admin.')
         ->except(['show']);
     Route::resource('option', \App\Http\Controllers\Admin\OptionController::class)
         ->except(['show']);
+    Route::resource('newsletter', \App\Http\Controllers\Admin\NewsletterController::class)
+        ->except('show');
+    Route::get('/newsletter/{newsletter}/send', [\App\Http\Controllers\Admin\NewsletterController::class, 'send'])
+        ->name('newsletter.send');
+    Route::get('/newsletter_maj', [\App\Http\Controllers\Admin\HomeController::class, 'newsletter_maj'])
+        ->name('newsletter_maj');
 });
 
 //pages

@@ -23,16 +23,31 @@
         </form>
     </div>
 
-
     <div class="container">
         @include('shared.flash')
         <a href="{{ route('announce.create') }}" class="btn btn-success btn-lg mb-3">Proposer une location !</a>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-            @forelse ($announces as $announce)
+            @php $randomIndex = rand(1, count($announces)); @endphp
+            @forelse ($announces as $key => $announce)
                 @if ($announce->availability)
                     <div class="col mb-4">
                         @include('announces.card')
                     </div>
+                    <!-- Insérer le code de la publicité Google Ads aléatoirement
+                    @if ($key + 1 === $randomIndex)
+                        <div class="col mb-4">
+                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2671737190304214" crossorigin="anonymous"></script>
+                            <ins class="adsbygoogle"
+                                style="display:block"
+                                data-ad-format="fluid"
+                                data-ad-layout-key="-6r+df-25-bb+r7"
+                                data-ad-client="ca-pub-2671737190304214"
+                                data-ad-slot="3434160540"></ins>
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
+                    @endif-->
                 @endif
             @empty
                 <div class="col">

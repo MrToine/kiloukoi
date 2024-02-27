@@ -29,7 +29,7 @@ class AnnounceFormRequest extends FormRequest
             'postalcode' => ['required', 'min:4'],
             'price' => ['required', 'min:1'],
             'availability' => ['required', 'boolean'],
-            'options' => ['array', 'exists:options,id', 'required'],
+            'options' => ['array', 'exists:options,id'],
             'categories' => ['array', 'exists:categories,id', 'required'],
             'pictures' => ['array'],
             'pictures.*' => ['image', 'max:4000']

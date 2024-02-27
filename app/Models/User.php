@@ -86,4 +86,9 @@ class User extends Authenticatable
     public function review() {
         return $this->hasMany(Review::class, 'user_id');
     }
+
+    public function newsletter()
+    {
+        return $this->belongsTo(UserNewsletter::class);
+    }
 }
