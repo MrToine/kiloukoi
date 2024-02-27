@@ -4,6 +4,6 @@
 {{ $newsletter->content }}
 
 <small>
-    <center><a href="{{ route('newsletter.unfollow', ['mail' => $recipient]) }}">Se désabonner</a></center>
+    <center><a href="{{ route('newsletter.unfollow', ['mail' => $mail]) }}">Se désabonner</a></center>
 </small>
 </x-mail::message>

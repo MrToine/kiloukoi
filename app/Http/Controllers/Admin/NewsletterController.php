@@ -76,12 +76,10 @@ class NewsletterController extends AdminController
     public function send($newsletter) {
         $newsletter = Newsletter::findOrFail($newsletter);
         $mails = UserNewsletter::all();
-        $mails_list = [];
-        foreach ($mails as $userNewsletter) {
-            $email = $userNewsletter->user->email;
-            $mails_list[] = $email;
+
+        foreach ($mails as $mail) {
+            Mail::send(new NewsletterMail($newsletter, $mail->user->email));
         }
-        Mail::send(new NewsletterMail($newsletter, $mails_list));
         return to_route('admin.newsletter.index')->with('success', 'La newsletter à bien été envoyée !');
     }
 }

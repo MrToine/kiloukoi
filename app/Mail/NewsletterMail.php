@@ -10,35 +10,47 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Markdown;
 
-use App\Models\Newsletter;
 use App\Models\User;
+use App\Models\Newsletter;
 
 class NewsletterMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $newsletter;
+    public $mails_list;
+
     /**
      * Create a new message instance.
+     *
+     * @param Newsletter $newsletter
+     * @param array $mails_list
      */
-    public function __construct(public Newsletter $newsletter, $mails_list)
+    public function __construct(Newsletter $newsletter, $mail)
     {
-        $this->mails_list = $mails_list;
         $this->newsletter = $newsletter;
-        $this->recipient = null;
+        $this->mailto = $mail;
     }
 
     /**
      * Get the message envelope.
      */
-    public function build()
+    public function envelope(): Envelope
     {
-        foreach ($this->mails_list as $recipient) {
-            $this->recipient = $recipient;
-            $this->to($recipient);
-            $this->subject($this->newsletter->title);
-        }
+        return new Envelope(
+            to: $this->mailto,
+            subject: $this->newsletter->title,
+        );
+    }
 
-        return $this->markdown('emails.newsletter.generic')->with('recipient', $this->recipient);
+    public function content(): Content
+    {
+        return new Content(
+            markdown: 'emails.newsletter.generic',
+            with: [
+                'mail' => $this->mailto,
+            ]
+        );
     }
 
     /**
