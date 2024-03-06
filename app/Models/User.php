@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->hasMany(Announce::class);
     }
 
+    public function requests()
+    {
+        return $this->hasMany(AnnounceRequest::class);
+    }
+
     public function locationRequests()
     {
         return $this->hasMany(LocationRequest::class);

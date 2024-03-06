@@ -10,5 +10,5 @@
 @endphp
 
 @if ($notifications > 0)
-    <span class="badge text-bg-danger">{{ $notifications }}</span>
+    <span class="translate-middle badge rounded-pill bg-danger">{{ $notifications }}</span>
 @endif

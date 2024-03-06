@@ -13,7 +13,7 @@
                 <div class="col-md-8">
                     @include('shared.input', ['class' => 'col-md-6', 'label' => 'titre', 'name' => 'title', 'value' => $newsletter->title])
                     @include('shared.input', ['type' => 'hidden', 'name' => 'template', 'value' => 'default'])
-                    @include('shared.input', ['type' => 'textarea', 'class' => 'mb-3', 'label' => 'Contenu de la newsletter', 'name' => 'content', 'value' => $newsletter->description])
+                    @include('shared.input', ['type' => 'textarea', 'class' => 'mb-3', 'label' => 'Contenu de la newsletter', 'name' => 'content', 'value' => $newsletter->content])
                 </div>
             </div>
 

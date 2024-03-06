@@ -114,12 +114,35 @@ Route::get('user/login', [\App\Http\Controllers\AuthController::class, 'login'])
 Route::post('user/login', [\App\Http\Controllers\AuthController::class, 'dologin']);
 Route::delete('user/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
+// Annonces
+Route::get('announce', [\App\Http\Controllers\AnnounceController::class, 'index'])->name('announce.index');
+Route::get('announce/{slug}-{announce}', [\App\Http\Controllers\AnnounceController::class, 'show'])->name('announce.show')->where([
+    'announce' => $idRegex,
+    'slug' => $slugRegex
+]);
+Route::post('announce/{announce}', [\App\Http\Controllers\AnnounceController::class, 'contact'])->name('announce.contact')->where([
+    'announce' => $idRegex
+]);
 Route::get('/announce/create', [\App\Http\Controllers\AnnounceController::class, 'create'])->middleware('auth')->name('announce.create');
 Route::post('/announce/create', [\App\Http\Controllers\AnnounceController::class, 'store'])->middleware('auth')->name('announce.store');
-
 Route::get('/announce/edit/{announce}', [\App\Http\Controllers\AnnounceController::class, 'edit'])->middleware('auth')->name('announce.edit');
 Route::put('/announce/edit/{announce}', [\App\Http\Controllers\AnnounceController::class, 'update'])->middleware('auth')->name('announce.update');
 Route::delete('/announce/destroy/{announce}', [\App\Http\Controllers\AnnounceController::class, 'destroy'])->middleware('auth')->name('announce.destroy');
+
+// requete d'annonces
+Route::get('announce/request', [\App\Http\Controllers\RequestController::class, 'index'])->name('announce.request.index');
+Route::get('announce/request/{slug}-{request}', [\App\Http\Controllers\RequestController::class, 'show'])->name('announce.request.show')->where([
+    'request' => $idRegex,
+    'slug' => $slugRegex
+]);
+Route::post('announce/request/{request}', [\App\Http\Controllers\RequestController::class, 'contact'])->name('announce.request.contact')->where([
+    'request' => $idRegex
+]);
+Route::get('/announce/request/create', [\App\Http\Controllers\RequestController::class, 'create'])->middleware('auth')->name('announce.request.create');
+Route::post('/announce/request/create', [\App\Http\Controllers\RequestController::class, 'store'])->middleware('auth')->name('announce.request.store');
+Route::get('/announce/request/edit/{announce}', [\App\Http\Controllers\RequestController::class, 'edit'])->middleware('auth')->name('announce.request.edit');
+Route::put('/announce/request/edit/{announce}', [\App\Http\Controllers\RequestController::class, 'update'])->middleware('auth')->name('announce.request.update');
+Route::delete('/announce/request/destroy/{announce}', [\App\Http\Controllers\RequestController::class, 'destroy'])->middleware('auth')->name('announce.request.destroy');
 
 Route::prefix('user/account')->name('account.')
     ->middleware(['auth', 'role:user|admin'])
@@ -146,16 +169,6 @@ Route::prefix('user/account')->name('account.')
     Route::delete('/rents/request/destroy/{location_request}', [\App\Http\Controllers\AccountController::class, 'request_destroy'])->name('request.destroy');
 });
 
-// Annonces
-Route::get('announce', [\App\Http\Controllers\AnnounceController::class, 'index'])->name('announce.index');
-Route::get('announce/{slug}-{announce}', [\App\Http\Controllers\AnnounceController::class, 'show'])->name('announce.show')->where([
-    'announce' => $idRegex,
-    'slug' => $slugRegex
-]);
-Route::post('announce/{announce}', [\App\Http\Controllers\AnnounceController::class, 'contact'])->name('announce.contact')->where([
-    'announce' => $idRegex
-]);
-
 // Avis
 Route::get('/reviews/{announce}/create/{token}', [\App\Http\Controllers\ReviewController::class, 'create'])
     ->middleware('auth')
@@ -178,9 +191,13 @@ Route::prefix('admin')->name('admin.')
         ->name('home');
     Route::get('/announce/{announce}/check_moderation', [\App\Http\Controllers\Admin\AnnounceController::class, 'check_moderation'])
         ->name('announce.check_moderation');
+        Route::get('/request/{announceRequest}/check_moderation', [\App\Http\Controllers\Admin\AnnounceRequestController::class, 'check_moderation'])
+        ->name('request.check_moderation');
     Route::resource('user', \App\Http\Controllers\AccountController::class)
         ->except(['show']);
     Route::resource('announce', \App\Http\Controllers\Admin\AnnounceController::class)
+        ->except(['show']);
+        Route::resource('request', \App\Http\Controllers\Admin\AnnounceRequestController::class)
         ->except(['show']);
     Route::resource('page', \App\Http\Controllers\Admin\PageController::class)
         ->except(['show']);
@@ -192,6 +209,8 @@ Route::prefix('admin')->name('admin.')
         ->except('show');
     Route::get('/newsletter/{newsletter}/send', [\App\Http\Controllers\Admin\NewsletterController::class, 'send'])
         ->name('newsletter.send');
+    Route::get('/newsletter/{newsletter}/send_test', [\App\Http\Controllers\Admin\NewsletterController::class, 'send_test'])
+        ->name('newsletter.send_test');
     Route::get('/newsletter_maj', [\App\Http\Controllers\Admin\HomeController::class, 'newsletter_maj'])
         ->name('newsletter_maj');
 });

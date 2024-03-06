@@ -29,6 +29,7 @@
                                 <button class="btn btn-danger">Supprimer</button>
                             </form>
                             <a href="{{ route('admin.newsletter.send', $newsletter) }}" class="btn btn-success">Envoyer</a>
+                            <a href="{{ route('admin.newsletter.send_test', $newsletter) }}" class="btn btn-dark">Email de test</a>
                         </div>
                     </td>
                 </tr>

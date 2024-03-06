@@ -82,4 +82,12 @@ class NewsletterController extends AdminController
         }
         return to_route('admin.newsletter.index')->with('success', 'La newsletter à bien été envoyée !');
     }
+
+    public function send_test($newsletter) {
+        $newsletter = Newsletter::findOrFail($newsletter);
+
+        Mail::send(new NewsletterMail($newsletter, "anthony.violet@outlook.be"));
+
+        return to_route('admin.newsletter.index')->with('success', 'La newsletter à bien été envoyée !');
+    }
 }

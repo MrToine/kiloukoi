@@ -16,12 +16,6 @@
 
     <div class="container">
         @include('shared.flash')
-        <div class="alert alert-warning">
-            <strong>Mise à jour 25/02/2024 : </strong><em>Ajout de la fonctionnalité de récupération de mot de passe en cas d'oubli de ce dernier.</em>.<br>
-            Si vous avez rencontré un problème sur notre site, veuillez nous en informer en remplissant le formulaire dans le lien ci-dessous.
-            Nous prendrons les mesures nécessaires pour résoudre le problème.<br>
-            <a href="{{ route('contact.form') }}" class="nav-link link-info">Contacter un administrateur</a>
-        </div>
 
         <h2 class="mb-4">Les dernières offres de location</h2>
         <div class="row">

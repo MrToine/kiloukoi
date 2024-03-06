@@ -13,7 +13,9 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
+                <li class="nav-item"><a @class(['nav-link', 'active' => str_contains($route, 'infos')]) href="/infos">Infos</a></li>
                 <li class="nav-item"><a @class(['nav-link', 'active' => str_contains($route, 'announce.')]) href="{{ route('announce.index') }}">Annonces</a></li>
+                <li class="nav-item"><a @class(['nav-link', 'active' => str_contains($route, 'request.')]) href="{{ route('announce.request.index') }}">Demandes</a></li>
             </ul>
 
             <div class="ms-auto">
@@ -31,12 +33,14 @@
                 @auth
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="{{ route('announce.create') }}" class="btn btn-success">Proposer une location !</a>
+                            <a href="{{ route('announce.request.create') }}" class="btn btn-success">Je recherche !</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('announce.create') }}" class="nav-link">Proposer une location <i class="fa-solid fa-hand-point-up"></i></a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('account.announces') }}" class="nav-link">
-                                Mon compte
-                                @include('shared.notifications')
+                                Mon compte @include('shared.notifications')
                             </a>
                         </li>
                         <li class="nav-item">

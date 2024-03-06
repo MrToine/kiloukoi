@@ -17,21 +17,21 @@
 
     <li class="nav-item">
         <a class="nav-link {{ str_contains($userRoute, '.announces') ? 'active' : '' }}" href="{{ route('account.announces') }}">
-            Mes offres
+            <i class="fa-solid fa-truck-ramp-box"></i> Mes offres
             @include('user.announces_notification')
         </a>
     </li>
 
     <li class="nav-item">
         <a class="nav-link {{ str_contains($userRoute, '.rents') ? 'active' : '' }}" href="{{ route('account.rents') }}">
-            Mes locations
+            <i class="fa-solid fa-truck-moving"></i> Mes locations
             @include('user.rents_notification')
         </a>
     </li>
 
     <li class="nav-item">
         <a class="nav-link {{ str_contains($userRoute, '.messages') ? 'active' : '' }}" href="{{ route('account.messages.index') }}">
-            Messages
+            <i class="fa-regular fa-comments"></i> Messages
             @include('user.messages_notification')
         </a>
     </li>
