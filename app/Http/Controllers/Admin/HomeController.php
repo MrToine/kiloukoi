@@ -8,11 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 use App\Models\Page;
+use App\Models\Maj;
 use App\Models\Category;
 use App\Models\Option;
 use App\Models\Announce;
 use App\Models\User;
 use App\Models\UserNewsletter;
+use App\Models\VisitorNewsletter;
 use App\Models\LocationRequest;
 use App\Models\PrivateBox;
 use App\Models\PrivateMessage;
@@ -27,6 +29,11 @@ class HomeController extends AdminController
                 'title' => 'pages',
                 'total' => Page::count(),
                 'route' => 'admin.page',
+            ],
+            [
+                'title' => 'mise à jours',
+                'total' => Maj::count(),
+                'route' => 'admin.maj',
             ],
             [
                 'title' => 'annonces',
@@ -55,6 +62,7 @@ class HomeController extends AdminController
         return view('admin.home', [
             'summaries' => $summaries,
             'nb_userAffiliate' => UserNewsletter::count(),
+            'nb_visitorAffiliate' => VisitorNewsletter::count(),
             'maj_newsletter' => $maj_newsletter,
         ]);
     }

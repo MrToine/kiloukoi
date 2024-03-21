@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 
 use App\Models\Newsletter;
 use App\Models\UserNewsletter;
+use App\Models\VisitorNewsletter;
 use App\Mail\NewsletterMail;
 
 use App\Http\Requests\Admin\NewsletterFormRequest;
@@ -75,11 +76,17 @@ class NewsletterController extends AdminController
 
     public function send($newsletter) {
         $newsletter = Newsletter::findOrFail($newsletter);
-        $mails = UserNewsletter::all();
+        $mails_users = UserNewsletter::all();
+        $mails_visitors = VisitorNewsletter::all();
 
-        foreach ($mails as $mail) {
+        foreach ($mails_users as $mail) {
             Mail::send(new NewsletterMail($newsletter, $mail->user->email));
         }
+
+        foreach ($mails_visitors as $mail) {
+            Mail::send(new NewsletterMail($newsletter, $mail->email));
+        }
+
         return to_route('admin.newsletter.index')->with('success', 'La newsletter à bien été envoyée !');
     }
 

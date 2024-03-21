@@ -178,6 +178,8 @@ Route::post('/reviews/store', [\App\Http\Controllers\ReviewController::class, 's
     ->name('reviews.store');
 
 // Newsletter
+Route::post('/newsletter/follow/', [\App\Http\Controllers\NewsletterController::class, 'follow'])
+->name('newsletter.follow');
 Route::get('/newsletter/unfollow/{mail}', [\App\Http\Controllers\NewsletterController::class, 'unfollow'])
     ->name('newsletter.unfollow');
 Route::post('/newsletter/unfollow/{mail}', [\App\Http\Controllers\NewsletterController::class, 'dounfollow'])
@@ -201,6 +203,8 @@ Route::prefix('admin')->name('admin.')
         ->except(['show']);
     Route::resource('page', \App\Http\Controllers\Admin\PageController::class)
         ->except(['show']);
+    Route::resource('maj', \App\Http\Controllers\Admin\MajController::class)
+        ->except(['show']);
     Route::resource('category', \App\Http\Controllers\Admin\CategoryController::class)
         ->except(['show']);
     Route::resource('option', \App\Http\Controllers\Admin\OptionController::class)
@@ -217,3 +221,6 @@ Route::prefix('admin')->name('admin.')
 
 //pages
 Route::get('/{slug}', [App\Http\Controllers\PageController::class, 'index'])->name('page.show');
+
+// devblog
+Route::get('/devblog/majs-list', [App\Http\Controllers\DevBlogController::class, 'majsList'])->name('devblog.majs-list');

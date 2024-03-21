@@ -15,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>kiloukoi : @yield('title')</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.css" rel="stylesheet">
     <script type="text/javascript" src="https://cache.consentframework.com/js/pa/37783/c/UZKH3/stub"></script>
@@ -35,6 +36,14 @@
 
         .bg-img-account {
             background-image: url('/images/website/account_bg.png');
+            background-position: center;
+            color: #fff;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .bg-img-majlist {
+            background-image: url('/images/website/maj_little_man.png');
             background-position: center;
             color: #fff;
             text-align: center;
@@ -83,12 +92,29 @@
         .hidden {
             display:none;
         }
+
+        /* BTN */
+        .btn-primary-subtle {
+            color: #007bff;
+            background-color: #031633;
+            border-color: #010a18;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+        }
+
+        .btn-primary-subtle:hover {
+            color: #0056b3;
+            text-decoration: underline;
+            background-color: #010a18;
+            border-color: #031633;
+        }
     </style>
 </head>
 <body>
     @include('shared.navbar')
 
     @yield('content')
+
+    @include('shared.modale')
 
     <div class="bg-dark p-5 bg-footer mt-5">
         <div class="row">
@@ -98,7 +124,7 @@
                     <li class="list-group"><a href="/pourquoi-kiloukoi" class="link-secondary">Pourquoi kiloukoi ?</a></li>
                     <li class="list-group"><a href="/a-propos" class="link-secondary">Fonctionnement</a></li>
                     <li class="list-group"><a href="" class="link-secondary">Blog</a></li>
-                    <li class="list-group"><a href="mailto:contact@kiloukoi.be" class="link-secondary">Contact</a></li>
+                    <li class="list-group"><a href="/contact" class="link-secondary">Contact</a></li>
                 </ul>
             </div>
             <div class="col">
@@ -123,6 +149,14 @@
                     <li class="list-group"><a href="" class="link-secondary">Guide du parfait annonceur</a></li>
                 </ul>
             </div>
+        </div>
+        <div class="col-md-2 text-start">
+            <form class="d-flex" action="{{ route('newsletter.follow') }}" method="post">
+                @method("post")
+                @csrf
+                <input type="email" name="email" class="form-control me-2 bg-secondary text-light" placeholder="name@example.com">
+                <button class="btn btn-primary-subtle">Inscription</button>
+            </form>
         </div>
         <div class="row-col align-self-end">
             2024 kiloukoi

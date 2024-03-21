@@ -28,7 +28,8 @@
             </div>
             <div class="card-body">
                 <h5>Total emails affiliés</h5>
-                <p>Il y a <strong>{{ $nb_userAffiliate }}</strong> personnes inscrits au newsletters</p>
+                <p>Il y a <strong>{{ $nb_userAffiliate }}</strong> utilisateurs inscrits au newsletters</p>
+                <p>Il y a <strong>{{ $nb_visitorAffiliate }}</strong> visiteurs inscrits au newsletters</p>
                 <div class="d-flex justify-content-between">
                     <a href="{{ route('admin.newsletter.index') }}" class="btn btn-primary">Liste des newsletters</a>
                     <a href="{{ route('admin.newsletter.create') }}" class="btn btn-success">Créer un email</a>
@@ -39,6 +40,23 @@
             </div>
         </div>
     </div>
-
+</div>
+<div class="col mb-4">
+    <div class="card">
+        <div class="card-header">
+            Données & Analyses
+        </div>
+        <div class="card-body">
+            <h5>Données</h5>
+            <a href="">Démographie</a>
+            <a href="">Comportement</a>
+            <a href="">Sources du trafic</a>
+            <a href="">Transactions</a>
+            <h5>Analyses</h5>
+            <a href="">Engagement résaux sociaux</a>
+            <a href="">Erreurs et performances du site</a>
+            <a href="">Feedback utilisateurs</a>
+        </div>
+    </div>
 </div>
 @endsection
