@@ -12,6 +12,7 @@ use App\Models\Announce;
 use App\Models\Picture;
 use App\Models\Option;
 use App\Models\Category;
+use App\Models\AnnounceRequest;
 
 use App\Http\Requests\Admin\AnnounceFormRequest;
 
@@ -95,6 +96,7 @@ class AnnounceController extends AdminController
         $announce->options()->detach();
         Picture::destroy($announce->pictures->pluck('id'));
 
+        $announce->locationRequests()->delete();
         $announce->delete();
         return to_route('admin.announce.index')->with('success', 'L\'annonce à bien été supprimer !');
     }
