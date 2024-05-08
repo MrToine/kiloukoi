@@ -13,7 +13,7 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item"><a @class(['nav-link', 'active' => str_contains($route, 'infos')]) href="/infos">Infos</a></li>
+                <li class="nav-item"><a @class(['nav-link', 'active' => str_contains($route, 'infos')]) href="/devblog/majs-list">Dernières Infos</a></li>
                 <li class="nav-item"><a @class(['nav-link', 'active' => str_contains($route, 'announce.')]) href="{{ route('announce.index') }}">Annonces</a></li>
                 <li class="nav-item"><a @class(['nav-link', 'active' => str_contains($route, 'request.')]) href="{{ route('announce.request.index') }}">Demandes</a></li>
             </ul>
@@ -33,10 +33,10 @@
                 @auth
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="{{ route('announce.request.create') }}" class="btn btn-success">Je recherche !</a>
+                            <a href="{{ route('announce.create') }}" class="btn btn-success">Proposer une location <i class="fa-solid fa-hand-point-up"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('announce.create') }}" class="nav-link">Proposer une location <i class="fa-solid fa-hand-point-up"></i></a>
+                            <a href="{{ route('announce.request.create') }}" class="nav-link">Je recherche !</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('account.announces') }}" class="nav-link">
