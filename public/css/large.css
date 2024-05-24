@@ -1,0 +1,58 @@
+@media only screen and (min-width:600px) {
+    .bg-img-majlist {
+        background-image: url(/images/website/maj_little_man.png);
+        background-position: center;
+        color: #fff;
+    }
+    
+    .baseline-logo {
+        width: 10%;
+    }
+
+    .logo {
+        margin-bottom: 0;
+    }
+
+    .navbar-brand {
+        padding: 15px;
+    }
+
+    .navbar-nav {
+        display: flex;
+        align-items: center;
+        max-width: 1150px;
+        margin: 0 auto;
+        padding: 18px 0;
+        justify-content: space-between;
+    }
+
+    .nav {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        padding-left: 0;
+        margin-bottom: 0;
+        list-style: none;
+    }
+    
+    .nav-item {
+        display: inline-block;
+        padding: 0;
+    }
+
+    .container-top {
+        margin: 50px;
+    }    
+
+    .badge {
+        border: 1px solid;
+        padding: 1px 5px;
+        display: inline-block;
+        position: relative;
+        font-size: 0.75rem;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+    }
+}

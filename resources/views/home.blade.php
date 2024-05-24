@@ -3,12 +3,9 @@
 @section('title', 'Louez de particuliers à particuliers')
 
 @section('content')
-    <div class="bg-light p-5 mb-5 text-center bg-img-home">
+    <div class="container bg-home">
         <div class="container">
-            <img src="{{ asset('images/website/logo_lg.png') }}" alt="" style="height:120px;">
-            <div class="alert">
-                <p>{{ __('home.edito.content') }}</p>
-            </div>
+            <p>{{ __('home.edito.content') }}</p>
             <a href="{{ route('announce.create') }}" class="btn btn-success btn-lg mb-2">Proposer une location !</a>
             <a href="{{ route('announce.index') }}" class="btn btn-primary btn-lg">Parcourir</a>
         </div>
@@ -17,11 +14,11 @@
     <div class="container">
         @include('shared.flash')
 
-        <h2 class="mb-4">Les dernières offres de location</h2>
+        <h2 class="">Les dernières offres de location</h2>
         <div class="row">
             @foreach ($announces as $announce)
                 @if ($announce->availability)
-                    <div class="col-12 col-md-6 col-lg-4 mb-4">
+                    <div class="col c2">
                         @include('announces.card')
                     </div>
                 @endif
@@ -39,12 +36,12 @@
             </script>-->
         </div>
 
-        <div class="row mt-4">
-            <div class="col-12 col-md-6 mb-4">
+        <div class="row">
+            <div class="container bg-home col c5 bg-loupe">
                 <h2>Trouvez ce que vous cherchez !</h2>
                 <p>Explorez notre communauté pour louer du matériel entre particuliers. Que vous ayez besoin d'outils, d'équipement sportif, ou d'autres articles, nous facilitons le processus de location.</p>
             </div>
-            <div class="col-12 col-md-6">
+            <div class="container bg-home col c5 bg-louer">
                 <h2>Louez ce que vous avez !</h2>
                 <p>Partagez votre matériel avec notre communauté en proposant des locations. C'est simple et bénéfique.</p>
             </div>

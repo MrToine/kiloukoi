@@ -1,4 +1,4 @@
-<div class="card position-relative">
+<div class="card">
     @if ($user && $user->id == $announce->user_id)
         @foreach ($user->locationRequests as $locationRequest)
             @if ($locationRequest->announce_id == $announce->id)
@@ -23,15 +23,13 @@
                 {{ $announce->price }}€
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col c4">
                     @foreach ($announce->categories as $category)
                         <span class="badge rounded-pill text-bg-info">{{ $category->name }}</span>
                     @endforeach
                 </div>
-                <div class="col">
-                    <a href="{{ route('announce.show', ['slug' => $announce->getSlug(), 'announce' => $announce]) }}#list-reviews">lire les {{ $announce->reviews->count() }} avis</a>
-                </div>
             </div>
+            <a href="{{ route('announce.show', ['slug' => $announce->getSlug(), 'announce' => $announce]) }}#list-reviews" class="link-primary">lire les {{ $announce->reviews->count() }} avis</a>
         </p>
     </div>
 </div>
