@@ -3,7 +3,7 @@
 @section('title', 'Contact')
 
 @section('content')
-    <div class="container mt-5 mx-auto">
+    <div class="container-small">
         <h2>Contact - Signalement de Problème</h2>
         <div class="alert alert-warning">
             <p>Si vous avez rencontré un problème sur notre site, veuillez nous en informer en remplissant le formulaire ci-dessous. Nous prendrons les mesures nécessaires pour résoudre le problème.</p>

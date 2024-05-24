@@ -3,20 +3,20 @@
 @section('title', 'Liste des annonces')
 
 @section('content')
-    <div class="bg-light p-3 mb-3 text-center bg-img-home">
-        <img src="{{ asset('images/website/logo_lg.png') }}" alt="Logo" style="height: 80px;" class="mb-2">
+    <div class="container-small">
+        <h2>Recherche</h2>
         <form action="" method="get" class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+                <div class="col c3">
                     <input type="text" placeholder="Mot-clé" class="form-control" name="title" value="{{ $input['title'] ?? '' }}">
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+                <div class="col c3">
                     <input type="number" placeholder="Prix max" class="form-control" name="price" value="{{ $input['price'] ?? '' }}">
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+                <div class="col c3">
                     <input type="text" placeholder="Ville" class="form-control" name="city" value="{{ $input['city'] ?? '' }}">
                 </div>
-                <div class="col-lg-3 col-md-12 col-sm-12 mb-2">
+                <div class="col c3">
                     <button class="btn btn-primary flex-grow-0">Rechercher</button>
                 </div>
             </div>

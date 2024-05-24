@@ -3,35 +3,39 @@
 @section('title', 'Inscription')
 
 @section('content')
-    <div class="row ms-auto">
-        <div class="col col-md-4 ms-auto">
+<div class="row">
+        <div class="col c2">&nbsp;</div>
+        <div class="col c8">
             <h1>@yield('title')</h1>
-            <div class="alert alert-secondary">
+            <div class="alert alert-secondary bg-login">
                 <p>Explorez notre communauté pour louer du matériel entre particuliers. Que vous ayez besoin d'outils, d'équipement sportif, ou d'autres articles, nous facilitons le processus de location.</p>
                 <p><center><strong>ou</strong></center></p>
                 <p><p>Partagez votre matériel avec notre communauté en proposant des locations. C'est simple et bénéfique :</p></p>
             </div>
             @include('shared.flash')
-            <form action="{{ route('register') }}" method="post" class="vstack gap-3">
-                @csrf
-                @include('shared.input', ['type' => 'text', 'class' => 'col', 'label' => 'Pseudo', 'name' => 'name'])
-                @include('shared.input', ['type' => 'email', 'class' => 'col', 'label' => 'Email', 'name' => 'email'])
-                @include('shared.input', ['type' => 'password', 'class' => 'col', 'label' => 'Mot de passe', 'name' => 'password'])
-                @include('shared.input', ['type' => 'password', 'class' => 'col', 'label' => 'Retapez votre mot de passe', 'name' => 'verif_password'])
-                <p>En vous inscrivant, vous acceptez les <a href="/conditions-generales-dutilisation">CGU</a> et la <a href="/politique-de-confidentialite">politique de confidentialité</a></p>
-                <div>
-                    <button class="btn btn-success">Inscription</button>
-                    <a href="{{ route('login') }}">Déja un compte ?</a>
+            <div class="row">
+                <div class="col c3">&nbsp;</div>
+                <div class="col c6">
+                    <form action="{{ route('register') }}" method="post" class="vstack gap-3">
+                        @csrf
+                        @include('shared.input', ['type' => 'text', 'class' => 'col', 'label' => 'Pseudo', 'name' => 'name'])
+                        @include('shared.input', ['type' => 'email', 'class' => 'col', 'label' => 'Email', 'name' => 'email'])
+                        @include('shared.input', ['type' => 'password', 'class' => 'col', 'label' => 'Mot de passe', 'name' => 'password'])
+                        @include('shared.input', ['type' => 'password', 'class' => 'col', 'label' => 'Retapez votre mot de passe', 'name' => 'verif_password'])
+                        <p class="text-important">En vous inscrivant, vous acceptez les <a href="/conditions-generales-dutilisation">CGU</a> et la <a href="/politique-de-confidentialite">politique de confidentialité</a></p>
+                        <div>
+                            <button class="btn btn-success">Inscription</button>
+                            <a href="{{ route('login') }}" class="link-secondary">Déja un compte ?</a>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-        <div class="col-6 ms-auto d-none d-md-block" style="position: relative; overflow: hidden; max-height: 100vh;">
-            <img src="{{ asset('images/website/bg-register.png') }}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+                
         </div>
     </div>
-    <div class="mt-4 row bg-light">
-        <div class="col">
-            <div class="container">
+    <div class="row">
+        <div class="col c6">
+            <div class="container bg-loupe">
                 <h2>Chercher une location</h2>
 
                 <ol>
@@ -45,8 +49,8 @@
                 <p>Rejoignez notre plateforme dès aujourd'hui et découvrez la facilité de louer du matériel tout en contribuant à une économie collaborative et durable !</p>
             </div>
         </div>
-        <div class="col">
-            <div class="container">
+        <div class="col c6">
+            <div class="container bg-louer">
                 <h2>Louer</h2>
 
                 <ol>

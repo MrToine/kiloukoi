@@ -4,15 +4,13 @@
 
 @section('content')
     <div class="row">
-        <div class="col-6 d-none d-md-block" style="position: relative; overflow: hidden; max-height: 100vh;">
-            <img src="{{ asset('images/website/bg-login.png') }}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
-        </div>
-        <div class="col col-md-4">
+        <div class="col c4">&nbsp;</div>
+        <div class="col c4">
             <h1>@yield('title')</h1>
 
             @include('shared.flash')
 
-            <div class="alert alert-secondary">
+            <div class="alert alert-info">
                 <p>Veuillez indiquer votre e-mail pour modifier votre mot de passe.</p>
             </div>
             <form action="{{ route('recuperation_password') }}" method="post" class="vstack gap-3">

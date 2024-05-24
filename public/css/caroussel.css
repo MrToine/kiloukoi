@@ -1,0 +1,117 @@
+/* Styles personnalisés pour le Carousel Bootstrap */
+.carousel {
+    position: relative;
+  }
+  .carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+  .carousel-item {
+    position: relative;
+    display: none;
+    align-items: center;
+    width: 100%;
+    transition: transform 0.6s ease, -webkit-transform 0.6s ease;
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+  .carousel-item-next, .carousel-item-prev, .carousel-item.active {
+    display: block;
+  }
+  .carousel-item-next, .carousel-item-prev {
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  .carousel-item-next {
+    left: 100%;
+    transform: translateX(0);
+  }
+  .carousel-item-prev {
+    right: 100%;
+    transform: translateX(0);
+  }
+  .carousel-item-next.carousel-item-start, .carousel-item-prev.carousel-item-end, .carousel-item.active.carousel-item-end, .carousel-item.active.carousel-item-start {
+    transform: translateX(0);
+  }
+  .carousel-control-prev, .carousel-control-next {
+    position: relative;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    text-align: center;
+    opacity: 0.5;
+    transition: opacity 0.15s ease;
+  }
+  .carousel-control-prev {
+    float: left;
+  } 
+  .carousel-control-next {
+    float: right;
+  }
+  .carousel-control-prev:hover, .carousel-control-prev:focus, .carousel-control-next:hover, .carousel-control-next:focus {
+    color: #072564;
+    text-decoration: none;
+    outline: 0;
+    opacity: 0.9;
+  }
+  .carousel-control-prev-icon, .carousel-control-next-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: no-repeat 50%/100% 100%;
+  }
+  .carousel-control-prev-icon {
+    background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="%23fff" viewBox="0 0 8 8"%3E%3Cpath d="M4.707 1.707L3.414.414 0 3.828l3.414 3.414 1.293-1.293L2.828 4.5H8V3.5H2.828l1.879-1.793z"/%3E%3C/svg%3E');
+  }
+  .carousel-control-next-icon {
+    background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" fill="%23fff" viewBox="0 0 8 8"%3E%3Cpath d="M3.293 1.707L4.586.414 8 3.828l-3.414 3.414-1.293-1.293 1.879-1.793H0V3.5h5.172L3.293 1.707z"/%3E%3C/svg%3E');
+  }
+  .carousel-indicators {
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+    left: 0;
+    z-index: 15;
+    display: flex;
+    justify-content: center;
+    padding-left: 0;
+    margin-right: 15%;
+    margin-left: 15%;
+    list-style: none;
+  }
+  .carousel-indicators [data-bs-target] {
+    flex: 0 1 auto;
+    width: 30px;
+    height: 3px;
+    margin-right: 3px;
+    margin-left: 3px;
+    text-indent: -999px;
+    cursor: pointer;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    opacity: 0.5;
+    transition: opacity 0.6s ease;
+  }
+  .carousel-indicators .active {
+    opacity: 1;
+  }
+  .carousel-caption {
+    position: absolute;
+    right: 15%;
+    bottom: 20px;
+    left: 15%;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #fff;
+    text-align: center;
+  }
+  

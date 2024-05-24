@@ -3,8 +3,9 @@
 @section('title', 'Modifier le mot de passe')
 
 @section('content')
-    <div class="row ms-auto">
-        <div class="col col-md-4 ms-auto">
+    <div class="row">
+        <div class="col c4">&nbsp;</div>
+        <div class="col c4">
             <h1>@yield('title')</h1>
             <div class="alert alert-warning">
                 Choisissez un mot de passe fort et unique.
@@ -18,9 +19,6 @@
                     <button class="btn btn-success">Modifier mon mot de passe</button>
                 </div>
             </form>
-        </div>
-        <div class="col-6 ms-auto d-none d-md-block" style="position: relative; overflow: hidden; max-height: 100vh;">
-            <img src="{{ asset('images/website/bg-register.png') }}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
     </div>
 @endsection

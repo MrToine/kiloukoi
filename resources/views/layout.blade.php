@@ -16,8 +16,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>kiloukoi : @yield('title')</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sora:wght@100..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/grid.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/mobile.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/large.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/caroussel.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/modal.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/tom-select.css') }}">
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">-->
     <script type="text/javascript" src="https://cache.consentframework.com/js/pa/37783/c/UZKH3/stub"></script>
     <script type="text/javascript" src="https://choices.consentframework.com/js/pa/37783/c/UZKH3/cmp" async></script>    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -25,100 +33,17 @@
     <link rel="icon" href="{{ asset('images/website/favicon.png') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('images/website/favicon.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        .bg-img-home {
-            background-image: url('/images/website/background.png');
-            background-position: center;
-            color: #fff;
-            text-align: center;
-            padding: 50px;
-        }
-
-        .bg-img-account {
-            background-image: url('/images/website/account_bg.png');
-            background-position: center;
-            color: #fff;
-            text-align: center;
-            padding: 50px;
-        }
-
-        .bg-img-majlist {
-            background-image: url('/images/website/maj_little_man.png');
-            background-position: center;
-            color: #fff;
-            text-align: center;
-            padding: 50px;
-        }
-
-        .bg-footer {
-            background-image: url('/images/website/logo_inverse.png');
-            background-repeat: no-repeat;
-            background-position: right;
-            min-height: 150px;
-            color: #fff;
-            text-align: center;
-            padding: 50px;
-        }
-        #gdpr-banner {
-            background-color: #343a40; /* Couleur de fond */
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
-            padding: 15px;
-        }
-
-        #gdpr-banner a {
-            color: #ffffff; /* Couleur du texte */
-        }
-
-        #gdpr-banner a:hover {
-            color: #ffffff; /* Couleur du texte au survol */
-            text-decoration: underline; /* Souligner au survol */
-        }
-
-        #gdpr-accept {
-            background-color: #007bff; /* Couleur du bouton Accepter */
-            color: #ffffff; /* Couleur du texte du bouton Accepter */
-            border-color: #007bff; /* Couleur de la bordure du bouton Accepter */
-            transition: background-color 0.3s ease; /* Transition de couleur au survol */
-        }
-
-        #gdpr-accept:hover {
-            background-color: #0056b3; /* Couleur du bouton Accepter au survol */
-        }
-        .hidden {
-            display:none;
-        }
-
-        /* BTN */
-        .btn-primary-subtle {
-            color: #007bff;
-            background-color: #031633;
-            border-color: #010a18;
-            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
-        }
-
-        .btn-primary-subtle:hover {
-            color: #0056b3;
-            text-decoration: underline;
-            background-color: #010a18;
-            border-color: #031633;
-        }
-    </style>
 </head>
 <body>
-    @include('shared.navbar')
+    @include('shared.header')
 
     @yield('content')
 
     @include('shared.modale')
 
-    <div class="bg-dark p-5 bg-footer mt-5">
+    <div class="footer">
         <div class="row">
-            <div class="col">
+            <div class="col c3">
                 <h6>kiloukoi.be</h6>
                 <ul class="list-group list-group-flush">
                     <li class="list-group"><a href="/pourquoi-kiloukoi" class="link-secondary">Pourquoi kiloukoi ?</a></li>
@@ -126,8 +51,22 @@
                     <li class="list-group"><a href="" class="link-secondary">Blog</a></li>
                     <li class="list-group"><a href="/contact" class="link-secondary">Contact</a></li>
                 </ul>
+                <form class="d-flex" action="{{ route('newsletter.follow') }}" method="post">
+                    <div class="row">
+                        <div class="col c4">
+                            @method("post")
+                            @csrf
+                            <input type="email" name="email" class="form-control small-input" placeholder="name@example.com">
+                        </div>
+                        <div class="col c1">&nbsp;</div>
+                        <div class="col c3">
+                            <button class="btn btn-primary">Inscription</button>
+                        </div>
+                    </div>
+                </form>
+                
             </div>
-            <div class="col">
+            <div class="col c3">
                 <h6>Louez un objet</h6>
                 <ul class="list-group list-group-flush">
                     @foreach ($getAnnouncesCategories as $category)
@@ -135,13 +74,13 @@
                     @endforeach
                 </ul>
             </div>
-            <div class="col">
+            <div class="col c3">
                 <h6>Assistance</h6>
                 <ul class="list-group list-group-flush">
                     <li class="list-group"><a href="/pourquoi-mon-annonce-est-refusee" class="link-secondary">Mon annonce n'a pas été validée</a></li>
                 </ul>
             </div>
-            <div class="col">
+            <div class="col c3">
                 <h6>Informations</h6>
                 <ul class="list-group list-group-flush">
                     <li class="list-group"><a href="/politique-de-confidentialite" class="link-secondary">Politique de confidentialité</a></li>
@@ -150,16 +89,8 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-2 text-start">
-            <form class="d-flex" action="{{ route('newsletter.follow') }}" method="post">
-                @method("post")
-                @csrf
-                <input type="email" name="email" class="form-control me-2 bg-secondary text-light" placeholder="name@example.com">
-                <button class="btn btn-primary-subtle">Inscription</button>
-            </form>
-        </div>
-        <div class="row-col align-self-end">
-            2024 kiloukoi
+        <div class="center">
+            &copy;2024 kiloukoi
         </div>
     </div>
     <script>

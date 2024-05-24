@@ -24,32 +24,42 @@
         <h6>
             Dans
             @foreach ($announce->categories as $category)
-            <a href=""><span class="badge rounded-pill text-bg-info">{{ $category->name }}</span></a>
+            <a href=""><span class="badge text-bg-info">{{ $category->name }}</span></a>
             @endforeach
         </h6>
         <hr>
         <div class="row">
-            <div class="col-4">
+            <div class="col c7">
                 <h2>Tarif journalier</h2>
                 <div class="text-primary fw-bold" style="font-size:4rem;">{{ $announce->price }}€</div>
+                <div class="container">
+                    <p>{!! nl2br($announce->description) !!}</p>
+                </div>
             </div>
-            <div class="col-4">
+            <div class="col c3">
                 <div id="carousel" class="carousel slide" data-bs-ride="carousel" style="max-width:800px;">
                     <div class="carousel-inner">
                         @foreach ($announce->pictures as $k => $picture)
                             <div class="carousel-item {{ $k == 0 ? 'active' : ''}}">
-                                <img src="{{ $picture->getUrl(550, 550) }}" alt="" class="w-100">
+                                <img src="{{ $picture->getUrl(450, 450) }}" alt="" class="w-100">
                             </div>
                         @endforeach
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
+                    <div class="row">
+                        <div class="col c6">
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                        </div>
+                        <div class="col c6">
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>               
+                    </div>
+                    
                 </div>
             </div>
             <div class="col-4">
@@ -66,11 +76,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="mt-4">
-            <p>{!! nl2br($announce->description) !!}</p>
-        </div>
-
         <hr>
         @guest
             <a href="{{ route('login') }}" class="btn btn-success">Se connecter pour faire une demande de location</a>
@@ -82,10 +87,18 @@
                 <form class="vstack gap-3" action="{{ route('announce.contact', $announce) }}" method="post">
                     @csrf
                     <div class="row">
-                        @include('shared.input', ['class' => 'col', 'label' => 'Prénom', 'name' => 'firstname'])
-                        @include('shared.input', ['type' => 'email', 'class' => 'col', 'label' => 'Email', 'name' => 'email'])
+                        <div class="col c4">
+                            @include('shared.input', ['label' => 'Prénom', 'name' => 'firstname'])
+                        </div>
+                        <div class="col c4">
+                            @include('shared.input', ['type' => 'email', 'class' => 'col', 'label' => 'Email', 'name' => 'email'])
+                        </div>
                     </div>
-                    @include('shared.input', ['type' => 'textarea', 'class' => 'col', 'name' => 'message'])
+                    <div class="row">
+                        <div class="col c8">
+                            @include('shared.input', ['type' => 'textarea', 'name' => 'message'])
+                        </div>
+                    </div>
                     <div>
                         <button class="btn btn-success">Envoyer</button>
                     </div>
