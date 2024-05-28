@@ -96,4 +96,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(UserNewsletter::class);
     }
+
+    public function devBlogPosts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

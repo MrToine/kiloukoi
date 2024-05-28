@@ -224,3 +224,5 @@ Route::get('/{slug}', [App\Http\Controllers\PageController::class, 'index'])->na
 
 // devblog
 Route::get('/devblog/majs-list', [App\Http\Controllers\DevBlogController::class, 'majsList'])->name('devblog.majs-list');
+Route::get('/devblog/index', [App\Http\Controllers\DevBlogController::class, 'devList'])->name('devblog.posts.list');
+Route::get('/devblog/show/{slug}', [App\Http\Controllers\DevBlogController::class, 'show'])->name('devblog.posts.show');
